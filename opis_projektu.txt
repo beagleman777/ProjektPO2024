@@ -1,0 +1,6 @@
+Tematem projektu jest system zarządzania pracownikami. Dany system zawiera dane o pracownikach, którzy mogą być dodawani, usuwani, lub których dane mogą być edytowane. Dane pracowników usuniętych mogą jednak być przechowywane przez odpowiedni okres czasu.
+System ten ma stwarzać wizję bazy zarządzania, który jest uniwersalny dla każdej firmy, a personalizacja samego systemu zależy już od firmy.
+Niniejszy system będzie uwzględniał procedurę autoryzacji, to jest dzieli się na odpwoiednie konta, które w zależności od przywilejów mogą
+zarządzać pracownikami i ich danymi. Na przykład, konto sekretarki ma możliwość dodawania i usuwania pracowników, a konto szefa ma uprawienia do odczytu owych danych.
+To, co zostaje wprowadzone w system, w tym systemie zostaje. Innymi słowy, takie typy danych jak na przykład data dodania pracownika, wyszukiwania pracowników po konkretnym, podanym filtrze,
+czy inne istotne zmiany system będzie przechowywał, celem możliwości późniejszego wglądu do tych danych, w zależności od potrzeb.

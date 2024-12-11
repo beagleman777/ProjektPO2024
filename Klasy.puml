@@ -27,10 +27,23 @@ class Secretary{
     getters_&_setters();
 }
 class Filter{
-
+    [private]
+    data_wyszukania
+    id_wyszukania
+    tytul_wyszukania
+    getters_&_setters()
+}
+class Edit{
+    [private]
+    data_edycji
+    id_edycji
+    tytul_edycji
+    getters_&_setters()
 }
 Secretary o-- Worker
 Boss <|-- Secretary
 Boss o-- Worker
 Boss o-- Filter
+Filter --|> Worker
+Edit --|> Worker
 @enduml
