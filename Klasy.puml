@@ -8,22 +8,25 @@ class Boss{
     list_some();
     getters&setters();
 }
-class Worker{
+class Employee{
     [private]
     int idNum;
     String imie;
     String nazwisko;
-    int pesel;
+    String pesel;
     String obywatelstwo;
     String stanowisko;
+    String address;
+    String email;
+    String data_urodzenia
     int dni_wolne;
     double wynagrodzenie;
     getters_&_setters();
 }
-class Secretary{
-    worker_add(Worker w);
-    worker_del(Worker w);
-    worker_edit(Worker w);
+class HR{
+    employee_add(Worker w);
+    employee_del(Worker w);
+    employee_edit(Worker w);
     getters_&_setters();
 }
 class Filter{
@@ -40,10 +43,10 @@ class Edit{
     tytul_edycji
     getters_&_setters()
 }
-Secretary o-- Worker
-Boss <|-- Secretary
-Boss o-- Worker
+HR o-- Employee
+Boss <|-- HR
+Boss o-- Employee
 Boss o-- Filter
-Filter --|> Worker
-Edit --|> Worker
+Filter --|> Employee
+Edit --|> Employee
 @enduml
