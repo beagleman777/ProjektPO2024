@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:controller="com.projekt.frontend.ValidateController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Login" />
+            <TextField maxWidth="-Infinity" promptText="Login" />
+            <Label text="Hasło" />
+            <PasswordField maxWidth="-Infinity" promptText="Hasło" />
+         </children></VBox>
+
+   </center>
+   <top>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="System Zadządzania Pracownikami">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <ToggleButton mnemonicParsing="false" text="Zaloguj się jako HR" />
+            <Label text="Logowanie jako:">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label text="Boss">
+               <padding>
+                  <Insets top="-26.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+         </children></VBox>
+   </top>
+</BorderPane>
