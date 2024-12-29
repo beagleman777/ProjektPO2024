@@ -5,14 +5,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:controller="com.projekt.frontend.ValidateController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.ValidateController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Login" />
             <TextField maxWidth="-Infinity" promptText="Login" />
             <Label text="Hasło" />
-            <PasswordField maxWidth="-Infinity" promptText="Hasło" />
+            <PasswordField maxWidth="-Infinity" promptText="Hasło">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></PasswordField>
+            <Button mnemonicParsing="false" text="Zaloguj">
+               <VBox.margin>
+                  <Insets top="17.0" />
+               </VBox.margin>
+            </Button>
          </children></VBox>
 
    </center>
@@ -24,6 +32,7 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
+            <Button mnemonicParsing="false" text="Dodaj nowego Boss" />
             <ToggleButton mnemonicParsing="false" text="Zaloguj się jako HR" />
             <Label text="Logowanie jako:">
                <font>
