@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Label fx:id="errorMessageLabel" text="Podane hasła nie zgadzają się!" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </center>
+</BorderPane>

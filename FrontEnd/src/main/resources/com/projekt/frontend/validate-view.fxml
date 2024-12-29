@@ -10,13 +10,13 @@
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Login" />
-            <TextField maxWidth="-Infinity" promptText="Login" />
+            <TextField fx:id="loginField" maxWidth="-Infinity" onAction="#onLoginField" promptText="Login" />
             <Label text="Hasło" />
-            <PasswordField maxWidth="-Infinity" promptText="Hasło">
+            <PasswordField fx:id="passwordField" maxWidth="-Infinity" onAction="#onPasswordField" promptText="Hasło">
                <VBox.margin>
                   <Insets />
                </VBox.margin></PasswordField>
-            <Button mnemonicParsing="false" text="Zaloguj">
+            <Button mnemonicParsing="false" onAction="#onLogIn" text="Zaloguj">
                <VBox.margin>
                   <Insets top="17.0" />
                </VBox.margin>
@@ -32,13 +32,14 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" text="Dodaj nowego Boss" />
-            <ToggleButton mnemonicParsing="false" text="Zaloguj się jako HR" />
+            <Button mnemonicParsing="false" onAction="#onAddBoss" text="Dodaj nowego Boss" />
+            <Button mnemonicParsing="false" onAction="#onAddHR" text="Dodaj nowego HR" />
+            <ToggleButton fx:id="logAs" mnemonicParsing="false" onAction="#onLogAs" text="Zaloguj się jako HR" />
             <Label text="Logowanie jako:">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label text="Boss">
+            <Label fx:id="loggingAs" text="Boss">
                <padding>
                   <Insets top="-26.0" />
                </padding>

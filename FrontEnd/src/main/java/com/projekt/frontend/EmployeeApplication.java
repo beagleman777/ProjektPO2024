@@ -11,14 +11,14 @@ import java.io.IOException;
 public class EmployeeApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("employee-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("validate-view.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Logging in");
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        EmployeeController controller = fxmlLoader.getController();
+        ValidateController controller = fxmlLoader.getController();
         controller.setPrimaryStage(primaryStage);
     }
 

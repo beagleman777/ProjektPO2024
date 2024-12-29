@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <Label text="Dodaj nowego Boss" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="28.0" />
-         </font></Label>
-   </top>
-</BorderPane>
+<ScrollPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.NewStaffTempController">
+   <content>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <top>
+            <Label fx:id="addStaffLabel" text="Dodaj nowego Boss" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+         </top>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onComeback" text="Powrót" />
+                  <Label text="Login" />
+                  <TextField fx:id="newLoginField" maxWidth="-Infinity" onAction="#onNewLogIn" promptText="Login">
+                     <VBox.margin>
+                        <Insets top="-20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Hasło" />
+                  <PasswordField fx:id="newPasswordField" maxWidth="-Infinity" onAction="#onNewPassword" promptText="Hasło">
+                     <VBox.margin>
+                        <Insets top="-20.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Label text="Powtórz hasło" />
+                  <PasswordField fx:id="repeatNewPasswordField" maxWidth="-Infinity" onAction="#onRepeatNewPassword" promptText="Hasło">
+                     <VBox.margin>
+                        <Insets top="-20.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Button fx:id="addStaffButton" mnemonicParsing="false" onAction="#onAddStaff" text="Utwórz Boss" />
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </content>
+</ScrollPane>

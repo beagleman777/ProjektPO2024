@@ -1,3 +1,5 @@
+package backend;
+
 public class Boss {
     private String login;
     private String password;
