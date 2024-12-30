@@ -38,7 +38,7 @@ public class NewStaffTempController {
     private String newPassword;
     private String repeatNewPassword;
     //true - Boss, false - backend.HR
-    private boolean bossOrHR=true;
+    private boolean bossOrHR;
     private List<Boss> bosses = new ArrayList<>();
 
     ValidateController mainController = new ValidateController();
@@ -50,13 +50,7 @@ public class NewStaffTempController {
         newLoginField.textProperty().addListener((observable, oldValue, newValue) -> {newLogin=newValue;});
         newPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {newPassword=newValue;});
         repeatNewPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {repeatNewPassword=newValue;});
-        if(bossOrHR){
-            addStaffLabel.setText("Dodaj nowego Boss");
-            addStaffButton.setText("Utwórz Boss");
-        } else {
-            addStaffLabel.setText("Dodaj nowego HR");
-            addStaffButton.setText("Utwórz HR");
-        }
+        bossOrHR=mainController.currentStaff();
     }
     //tworzenie nowego członka personelu
     @FXML
@@ -73,6 +67,14 @@ public class NewStaffTempController {
     }
     public void whoIsStaff(boolean who) {
         bossOrHR=who;
+    }
+    public void setTheBossStage() {
+        addStaffLabel.setText("Dodaj nowego Boss");
+        addStaffButton.setText("Utwórz Boss");
+    }
+    public void setTheHRStage() {
+        addStaffLabel.setText("Dodaj nowego HR");
+        addStaffButton.setText("Utwórz HR");
     }
     @FXML
     public void onAddStaff(ActionEvent actionEvent) throws IOException {
@@ -106,6 +108,7 @@ public class NewStaffTempController {
         Parent newRoot = fxmlLoader.load();
         Scene newScene = new Scene(newRoot);
         ValidateController controller = fxmlLoader.getController();
+        primaryStage.setTitle("Logging in");
         primaryStage.setScene(newScene);
         controller.setPrimaryStage(primaryStage);
     }

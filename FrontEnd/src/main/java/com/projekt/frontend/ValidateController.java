@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
-
 public class ValidateController implements Serializable {
     //Back
     private Stage primaryStage;
@@ -65,6 +64,9 @@ public class ValidateController implements Serializable {
         for(HR i : hrs){
             System.out.println(i.getLogin() + " " + i.getPassword());
         }
+    }
+    public boolean currentStaff() {
+        return bossOrHR;
     }
     public void getStaffFile() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/bosses.txt"))) {
@@ -122,9 +124,11 @@ public class ValidateController implements Serializable {
         primaryStage.setTitle("Dodaj Boss");
         primaryStage.setScene(newScene);
         primaryStage.show();
+        secondController.setTheBossStage();
     }
     @FXML
     public void onAddHR(ActionEvent actionEvent) throws IOException {
+        this.bossOrHR=false;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("new-view.fxml"));
         Parent second = loader.load();
         Scene newScene = new Scene(second);
@@ -135,7 +139,7 @@ public class ValidateController implements Serializable {
         primaryStage.setTitle("Dodaj HR");
         primaryStage.setScene(newScene);
         primaryStage.show();
-        bossOrHR=false;
+        secondController.setTheHRStage();
     }
     @FXML
     public void onLogAs(ActionEvent actionEvent) {

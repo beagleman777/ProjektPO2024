@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.projekt.frontend.EmployeeController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<ScrollPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="964.0">
+         <center>
+            <TableView fx:id="employeeTable" prefHeight="393.0" prefWidth="823.0" BorderPane.alignment="CENTER">
+              <columns>
+                  <TableColumn prefWidth="75.0" text="ID" />
+                  <TableColumn prefWidth="99.0" text=" Imię (Imiona)" />
+                  <TableColumn prefWidth="60.0" text="Nazwisko" />
+                <TableColumn prefWidth="86.0" text="PESEL" />
+                <TableColumn prefWidth="79.0" text="Narodowość" />
+                  <TableColumn prefWidth="51.0" text="Adres" />
+                  <TableColumn prefWidth="75.0" text="Email" />
+                  <TableColumn prefWidth="75.0" text="Telefon" />
+                  <TableColumn prefWidth="105.0" text="Data urodzenia" />
+                  <TableColumn prefWidth="104.0" text="Wynagrodzenie" />
+                  <TableColumn prefWidth="68.0" text="Dni wolne" />
+                  <TableColumn prefWidth="86.0" text="AKCJE" />
+              </columns>
+            </TableView>
+         </center>
+         <top>
+            <Label text="System Zarządzania Pracownikami" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+         </top>
+         <bottom>
+            <ButtonBar prefHeight="40.0" prefWidth="837.0" BorderPane.alignment="CENTER">
+              <buttons>
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="301.0" text="Wyszukaj po filtrze" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="317.0" text="Dodaj pracownika" />
+              </buttons>
+               <BorderPane.margin>
+                  <Insets right="85.0" />
+               </BorderPane.margin>
+             </ButtonBar>
+         </bottom></BorderPane>
+   </content>
+</ScrollPane>

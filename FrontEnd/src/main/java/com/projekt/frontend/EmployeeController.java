@@ -6,6 +6,8 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
 import javafx.fxml.*;
+import java.io.IOException;
+import java.io.File;
 public class EmployeeController {
     private Stage primaryStage;
     public void setPrimaryStage(Stage stage) {
