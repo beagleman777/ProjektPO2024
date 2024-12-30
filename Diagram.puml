@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 
-actor Sekretarka #blue
+actor HR #blue
 actor Szef #black
 control Frontend
 database Baza #5B1000
@@ -23,23 +23,23 @@ Szef <-- Frontend: Lista pracowników wg filtru: F
 
 autonumber 1
 
-Sekretarka --> Frontend: Dodaj pracownika
+HR --> Frontend: Dodaj pracownika
 Frontend --> Baza: Dodaj nowego pracownika o tych danych
 Frontend <-- Baza: Dodano pracownika
-Sekretarka <-- Frontend: Dodano pracownika
+HR <-- Frontend: Dodano pracownika
 
 autonumber 1
 
-Sekretarka --> Frontend: Usuń pracownika
+HR --> Frontend: Usuń pracownika
 Frontend --> Baza: Usuń tego pracownika
 Frontend <-- Baza: Usunięto pracownika
-Sekretarka <-- Frontend: Usunięto pracownika
+HR <-- Frontend: Usunięto pracownika
 
 autonumber 1
 
-Sekretarka --> Frontend: Edytuj dane pracownika P na dane E
+HR --> Frontend: Edytuj dane pracownika P na dane E
 Frontend --> Baza: Podstaw dane pracownika P na dane E
 Frontend <-- Baza: Zedytowano dane pracownika P
-Sekretarka <-- Frontend: Edycja przebiegła pomyślnie
+HR <-- Frontend: Edycja przebiegła pomyślnie
 
 @enduml

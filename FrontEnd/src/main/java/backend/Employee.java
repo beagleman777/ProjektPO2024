@@ -106,16 +106,16 @@ public class Employee {
         daysOff = daysOff_;
     }
     public void printEmployeeInfo() {
-        System.out.println("ID: " + idNum);
-        System.out.println("Name: " + name);
-        System.out.println("Surname: " + surname);
-        System.out.println("Pesel: " + pesel);
-        System.out.println("Nationality: " + nationality);
-        System.out.println("Address: " + address);
-        System.out.println("Email: " + email);
-        System.out.println("Phone: " + phone);
-        System.out.println("Birth Date: " + birth_date);
-        System.out.println("Salary: " + salary);
-        System.out.println("Days Off: " + daysOff);
+        System.out.print("ID: " + getIdNum() + "   ");
+        System.out.print("Name: " + getName() + "   ");
+        System.out.print("Surname: " + getSurname() + "   ");
+        System.out.print("Pesel: " + getPesel() + "   ");
+        System.out.print("Nationality: " + getNationality() + "   ");
+        System.out.print("Address: " + getAddress() + "   ");
+        System.out.print("Email: " + getEmail() + "   ");
+        System.out.print("Phone: " + getPhone() + "   ");
+        System.out.print("Birth Date: " + getBirth_date() + "   ");
+        System.out.print("Salary: " + getSalary() + "   ");
+        System.out.print("Days Off: " + getDaysOff() + "\n");
     }
 }

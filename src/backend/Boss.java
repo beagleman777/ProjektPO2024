@@ -1,10 +1,10 @@
 package backend;
+import java.util.ArrayList;
 
 public class Boss {
     private String login;
     private String password;
-    private Employee employee = new Employee();
-
+    protected ArrayList<Employee> Employees = new ArrayList<Employee>();
     public Boss(String login_, String password_) {
         login = login_;
         password = password_;
@@ -32,10 +32,19 @@ public class Boss {
     }
 
     public void listAll() {
-
+        for (Employee e : Employees) {
+            e.printEmployeeInfo();
+        }
     }
 
     public void listSome() {
+        for (Employee e : Employees) {
+            e.printEmployeeInfo();
+        }
+    }
 
+    public void printInfo() {
+        System.out.println("Login: " + login);
+        System.out.println("Password: " + password);
     }
 }

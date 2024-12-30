@@ -105,4 +105,17 @@ public class Employee {
     public void setDaysOff(Integer daysOff_) {
         daysOff = daysOff_;
     }
+    public void printEmployeeInfo() {
+        System.out.print("ID: " + getIdNum() + "   ");
+        System.out.print("Name: " + getName() + "   ");
+        System.out.print("Surname: " + getSurname() + "   ");
+        System.out.print("Pesel: " + getPesel() + "   ");
+        System.out.print("Nationality: " + getNationality() + "   ");
+        System.out.print("Address: " + getAddress() + "   ");
+        System.out.print("Email: " + getEmail() + "   ");
+        System.out.print("Phone: " + getPhone() + "   ");
+        System.out.print("Birth Date: " + getBirth_date() + "   ");
+        System.out.print("Salary: " + getSalary() + "   ");
+        System.out.print("Days Off: " + getDaysOff() + "\n");
+    }
 }
