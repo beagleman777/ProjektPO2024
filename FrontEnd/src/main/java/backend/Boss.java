@@ -38,4 +38,9 @@ public class Boss {
     public void listSome() {
 
     }
+
+    public void printInfo() {
+        System.out.println("Login: " + login);
+        System.out.println("Password: " + password);
+    }
 }
