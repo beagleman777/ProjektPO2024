@@ -16,19 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class CreatingStaffException extends Exception {
-    CreatingStaffException(String message) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("error.fxml"));
-        fxmlLoader.setController(this);
-        Parent root = fxmlLoader.load();
-        Label errorLabel = (Label) root.lookup("#errorMessageLabel");
-        Stage stage = new Stage();
-        stage.setTitle("Błąd!");
-        stage.setScene(new Scene(root));
-        stage.show();
-        errorLabel.setText(message);
-    }
-}
 public class NewStaffTempController {
     private Stage primaryStage;
     public void setPrimaryStage2(Stage stage) {
@@ -63,6 +50,13 @@ public class NewStaffTempController {
         newLoginField.textProperty().addListener((observable, oldValue, newValue) -> {newLogin=newValue;});
         newPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {newPassword=newValue;});
         repeatNewPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {repeatNewPassword=newValue;});
+        if(bossOrHR){
+            addStaffLabel.setText("Dodaj nowego Boss");
+            addStaffButton.setText("Utwórz Boss");
+        } else {
+            addStaffLabel.setText("Dodaj nowego HR");
+            addStaffButton.setText("Utwórz HR");
+        }
     }
     //tworzenie nowego członka personelu
     @FXML
@@ -76,6 +70,9 @@ public class NewStaffTempController {
     @FXML
     public void onRepeatNewPassword(ActionEvent actionEvent) {
         repeatNewPassword=repeatNewPasswordField.getText();
+    }
+    public void whoIsStaff(boolean who) {
+        bossOrHR=who;
     }
     @FXML
     public void onAddStaff(ActionEvent actionEvent) throws IOException {
@@ -95,7 +92,12 @@ public class NewStaffTempController {
             ValidateController controller = fxmlLoader.getController();
             primaryStage.setScene(newScene);
             controller.setPrimaryStage(primaryStage);
-            controller.acquirePasses(newLogin,newPassword);
+            if(bossOrHR){
+                controller.acquirePassesBoss(newLogin,newPassword);
+            } else {
+                controller.acquirePassesHR(newLogin,newPassword);
+            }
+
         }
     }
     @FXML

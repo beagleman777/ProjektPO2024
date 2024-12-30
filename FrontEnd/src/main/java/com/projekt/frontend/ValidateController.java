@@ -26,10 +26,10 @@ public class ValidateController implements Serializable {
     private String newLogin;
     private String newPassword;
     private String repeatNewPassword;
-    //true - Boss, false - backend.HR
+    //true - Boss, false - HR
     private boolean bossOrHR=true;
     private List<Boss> bosses = new ArrayList<>();
-
+    private List<HR> hrs = new ArrayList<>();
     //logowanie
     @FXML
     private Label loggingAs;
@@ -55,24 +55,45 @@ public class ValidateController implements Serializable {
     //Metody
     public void initialize() {
         try{
-            getBossesFile();
+            getStaffFile();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        for(Boss i : bosses){
+            System.out.println(i.getLogin() + " " + i.getPassword());
+        }
+        for(HR i : hrs){
+            System.out.println(i.getLogin() + " " + i.getPassword());
+        }
     }
-    public void getBossesFile() throws IOException {
+    public void getStaffFile() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/bosses.txt"))) {
             String line;
             int i = 0;
-            Boss tempboss=new Boss();
+
             while ((line = reader.readLine()) != null) {
                 if(i%2==0){
-                    tempboss.setLogin(line);
+                    bosses.add(new Boss());
+                    bosses.get(i/2).setLogin(line);
+                }
+                if(i%2==1) {
+                    bosses.get(i/2).setPassword(line);
+                }
+                i++;
+            }
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/hrs.txt"))) {
+            String line;
+            int i = 0;
+            while ((line = reader.readLine()) != null) {
+                if(i%2==0){
+                    hrs.add(new HR());
+                    hrs.get(i/2).setLogin(line);
                 }
                 if(i%2==1){
-                    tempboss.setPassword(line);
+                    hrs.get(i/2).setPassword(line);
                 }
-                bosses.add(tempboss);
+                i++;
             }
         }
     }
@@ -96,24 +117,25 @@ public class ValidateController implements Serializable {
         Scene newScene = new Scene(second);
         NewStaffTempController secondController = loader.getController();
         secondController.setPrimaryStage2(primaryStage);
+        secondController.setMainController(this);
+        secondController.whoIsStaff(bossOrHR);
         primaryStage.setTitle("Dodaj Boss");
         primaryStage.setScene(newScene);
         primaryStage.show();
-        secondController.setMainController(this);
     }
     @FXML
     public void onAddHR(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("new-view.fxml"));
-        Parent newRoot = fxmlLoader.load();
-        Scene newScene = new Scene(newRoot);
-        ValidateController controller = fxmlLoader.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("new-view.fxml"));
+        Parent second = loader.load();
+        Scene newScene = new Scene(second);
+        NewStaffTempController secondController = loader.getController();
+        secondController.setPrimaryStage2(primaryStage);
+        secondController.setMainController(this);
+        secondController.whoIsStaff(bossOrHR);
+        primaryStage.setTitle("Dodaj HR");
         primaryStage.setScene(newScene);
-        controller.setPrimaryStage(primaryStage);
-        controller.addStaffLabel.setText("Dodaj nowego HR");
-        controller.addStaffButton.setText("Utwórz HR");
-        controller.newLoginField.textProperty().addListener((observable, oldValue, newValue) -> {newLogin=newValue;});
-        controller.newPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {newPassword=newValue;});
-        controller.repeatNewPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {repeatNewPassword=newValue;});
+        primaryStage.show();
+        bossOrHR=false;
     }
     @FXML
     public void onLogAs(ActionEvent actionEvent) {
@@ -126,8 +148,28 @@ public class ValidateController implements Serializable {
             loggingAs.setText("HR");
         }
     }
-    public void acquirePasses(String log, String pass) {
+    public void acquirePassesBoss(String log, String pass) {
         this.newLogin=log;
         this.newPassword=pass;
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/bosses.txt" ,true))){
+            writer.write(this.newLogin);
+            writer.newLine();
+            writer.write(this.newPassword);
+            writer.newLine();
+        } catch (IOException e){
+            System.err.println("Nie ma pliku");
+        }
+    }
+    public void acquirePassesHR(String log, String pass) {
+        this.newLogin=log;
+        this.newPassword=pass;
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/hrs.txt" ,true))){
+            writer.write(this.newLogin);
+            writer.newLine();
+            writer.write(this.newPassword);
+            writer.newLine();
+        } catch (IOException e){
+            System.err.println("Nie ma pliku");
+        }
     }
 }
