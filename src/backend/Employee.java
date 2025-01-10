@@ -1,17 +1,17 @@
 package backend;
 
 public class Employee {
-    private Integer idNum;
-    private String name;
-    private String surname;
-    private String pesel;
-    private String nationality;
-    private String address;
-    private String email;
-    private String phone;
-    private String birth_date;
-    private Float salary;
-    private Integer daysOff;
+    private static Integer idNum;
+    private static String name;
+    private static String surname;
+    private static String pesel;
+    private static String nationality;
+    private static String address;
+    private static String email;
+    private static String phone;
+    private static String birth_date;
+    private static Float salary;
+    private static Integer daysOff;
     //String pattern = "dd-MM-yyyy";
     //LocalDateTime localDateTime;
     //localdatetime.pa
@@ -42,67 +42,67 @@ public class Employee {
     public Integer getIdNum() {
         return idNum;
     }
-    public void setIdNum(Integer idNum_) {
+    public static void setIdNum(Integer idNum_) {
         idNum = idNum_;
     }
     public String getName() {
         return name;
     }
-    public void setName(String name_) {
+    public static void setName(String name_) {
         name = name_;
     }
     public String getSurname() {
         return surname;
     }
-    public void setSurname(String surname_) {
+    public static void setSurname(String surname_) {
         surname = surname_;
     }
     public String getPesel() {
         return pesel;
     }
-    public void setPesel(String pesel_) {
+    public static void setPesel(String pesel_) {
         pesel = pesel_;
     }
     public String getNationality() {
         return nationality;
     }
-    public void setNationality(String nationality_) {
+    public static void setNationality(String nationality_) {
         nationality = nationality_;
     }
     public String getAddress() {
         return address;
     }
-    public void setAddress(String address_) {
+    public static void setAddress(String address_) {
         address = address_;
     }
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email_) {
+    public static void setEmail(String email_) {
         email = email_;
     }
     public String getPhone() {
         return phone;
     }
-    public void setPhone(String phone_) {
+    public static void setPhone(String phone_) {
         phone = phone_;
     }
     public String getBirth_date() {
         return birth_date;
     }
-    public void setBirth_date(String birth_date_) {
+    public static void setBirth_date(String birth_date_) {
         birth_date = birth_date_;
     }
     public Float getSalary() {
         return salary;
     }
-    public void setSalary(Float salary_) {
+    public static void setSalary(Float salary_) {
         salary = salary_;
     }
     public Integer getDaysOff() {
         return daysOff;
     }
-    public void setDaysOff(Integer daysOff_) {
+    public static void setDaysOff(Integer daysOff_) {
         daysOff = daysOff_;
     }
     public void printEmployeeInfo() {

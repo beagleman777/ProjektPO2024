@@ -1,17 +1,18 @@
 package backend;
+import java.util.Date;
 
 public class Edit extends Employee {
-    private String edit_date;
+    private Date edit_date;
     private String edit_id;
     private String edit_name;
 
-    public Edit(String edit_date_, String edit_id_, String edit_name_) {
+    public Edit(Date edit_date_, String edit_id_, String edit_name_) {
         edit_date = edit_date_;
         edit_id = edit_id_;
         edit_name = edit_name_;
     }
 
-    public String getEdit_date() {
+    public Date getEdit_date() {
         return edit_date;
     }
 
@@ -23,7 +24,7 @@ public class Edit extends Employee {
         return edit_name;
     }
 
-    public void setEdit_date(String edit_date_) {
+    public void setEdit_date(Date edit_date_) {
         edit_date = edit_date_;
     }
 

@@ -7,14 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="" scope="RUNTIME">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../openjfx-23.0.1_windows-x64_bin-sdk.zip!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="lib" level="application" />
   </component>
 </module>
