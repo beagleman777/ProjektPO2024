@@ -5,24 +5,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.EmployeeController">
    <content>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="964.0">
+      <BorderPane>
          <center>
-            <TableView fx:id="employeeTable" prefHeight="393.0" prefWidth="823.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="employeeTable" BorderPane.alignment="CENTER">
               <columns>
-                  <TableColumn prefWidth="75.0" text="ID" />
-                  <TableColumn prefWidth="99.0" text=" Imię (Imiona)" />
-                  <TableColumn prefWidth="60.0" text="Nazwisko" />
-                <TableColumn prefWidth="86.0" text="PESEL" />
-                <TableColumn prefWidth="79.0" text="Narodowość" />
-                  <TableColumn prefWidth="51.0" text="Adres" />
-                  <TableColumn prefWidth="75.0" text="Email" />
-                  <TableColumn prefWidth="75.0" text="Telefon" />
-                  <TableColumn prefWidth="105.0" text="Data urodzenia" />
-                  <TableColumn prefWidth="104.0" text="Wynagrodzenie" />
-                  <TableColumn prefWidth="68.0" text="Dni wolne" />
-                  <TableColumn prefWidth="86.0" text="AKCJE" />
+                  <TableColumn fx:id="tableID" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="tableName" prefWidth="99.0" text=" Imię (Imiona)" />
+                  <TableColumn fx:id="tableSurname" prefWidth="60.0" text="Nazwisko" />
+                <TableColumn fx:id="tablePESEL" prefWidth="86.0" text="PESEL" />
+                <TableColumn fx:id="tableNationality" prefWidth="79.0" text="Narodowość" />
+                  <TableColumn fx:id="tableAddress" prefWidth="51.0" text="Adres" />
+                  <TableColumn fx:id="tableEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="tablePhone" prefWidth="75.0" text="Telefon" />
+                  <TableColumn fx:id="tableBirth" prefWidth="105.0" text="Data urodzenia" />
+                  <TableColumn fx:id="tableSalary" prefWidth="104.0" text="Wynagrodzenie" />
+                  <TableColumn fx:id="tableDaysoff" prefWidth="68.0" text="Dni wolne" />
+                  <TableColumn fx:id="tableEDIT" prefWidth="73.0" text="EDYTUJ" />
+                  <TableColumn fx:id="tableFIRE" prefWidth="88.0" text="ZWOLNIJ" />
               </columns>
             </TableView>
          </center>

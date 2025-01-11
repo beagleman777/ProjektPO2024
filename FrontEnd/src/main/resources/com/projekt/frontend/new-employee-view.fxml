@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane prefHeight="420.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.AddEmployeeCotroller">
+   <content>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="538.0">
+         <top>
+            <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="System Zarządzania Pracownikami">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label text="Dodawanie nowego pracownika">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </top>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="430.0" prefWidth="747.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Imię" />
+                  <TextField fx:id="nameField" maxWidth="-Infinity" onAction="#onNameField" prefWidth="207.0" promptText="Imię" />
+                  <Label text="Nazwisko" />
+                  <TextField fx:id="surnameField" maxWidth="-Infinity" onAction="#onSurnameField" prefWidth="207.0" promptText="Nazwisko" />
+                  <Label text="PESEL" />
+                  <TextField fx:id="peselField" maxWidth="-Infinity" onAction="#onPeselField" prefWidth="207.0" promptText="PESEL" />
+                  <Label text="Narodowość" />
+                  <TextField fx:id="nationalityField" maxWidth="-Infinity" onAction="#onNationalityField" prefWidth="207.0" promptText="Narodowość" />
+                  <Label text="Adres" />
+                  <TextField fx:id="addressField" maxWidth="-Infinity" onAction="#onAddressField" prefWidth="207.0" promptText="Adres" />
+                  <Label text="Email" />
+                  <TextField fx:id="emailField" maxWidth="-Infinity" onAction="#onEmailField" prefWidth="207.0" promptText="Email" />
+                  <Label text="Telefon" />
+                  <TextField fx:id="phoneField" maxWidth="-Infinity" onAction="#onPhoneField" prefWidth="207.0" promptText="Telefon" />
+                  <Label text="Data urodzenia" />
+                  <TextField fx:id="birthFIeld" maxWidth="-Infinity" onAction="#onBirthField" prefWidth="207.0" promptText="Data urodzenia" />
+                  <Label text="Wynagrodzenie" />
+                  <TextField fx:id="salaryField" maxWidth="-Infinity" onAction="#onSalaryField" prefWidth="207.0" promptText="Wynagrodzenie" />
+                  <Label text="Dni wolne" />
+                  <TextField fx:id="daysoffField" maxWidth="-Infinity" onAction="#onDaysoffField" prefWidth="207.0" promptText="Dni wolne" />
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <Button mnemonicParsing="false" onAction="#onAddTheEmployee" prefHeight="15.0" prefWidth="112.0" text="Dodaj pracownika" BorderPane.alignment="TOP_CENTER" />
+         </bottom>
+      </BorderPane>
+   </content>
+</ScrollPane>

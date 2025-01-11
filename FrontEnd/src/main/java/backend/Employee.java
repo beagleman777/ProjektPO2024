@@ -16,9 +16,10 @@ public class Employee {
     //LocalDateTime localDateTime;
     //localdatetime.pa
     // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    public Employee(int idNum_, String name_, String pesel_, String nationality_, String address_, String email_, String phone_, String birth_date_, Float salary_, Integer daysOff_) {
+    public Employee(int idNum_, String name_, String surname_, String pesel_, String nationality_, String address_, String email_, String phone_, String birth_date_, Float salary_, Integer daysOff_) {
         idNum = idNum_;
         name = name_;
+        surname = surname_;
         pesel = pesel_;
         nationality = nationality_;
         address = address_;

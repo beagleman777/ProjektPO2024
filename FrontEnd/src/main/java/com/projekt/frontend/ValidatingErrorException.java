@@ -8,8 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CreatingStaffException extends Exception {
-    CreatingStaffException(String message) throws IOException {
+public class ValidatingErrorException extends Exception {
+    ValidatingErrorException(String message) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("error.fxml"));
         fxmlLoader.setController(this);
         Parent root = fxmlLoader.load();
