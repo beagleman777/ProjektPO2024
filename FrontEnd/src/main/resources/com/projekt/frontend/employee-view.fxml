@@ -38,7 +38,7 @@
             <ButtonBar prefHeight="40.0" prefWidth="837.0" BorderPane.alignment="CENTER">
               <buttons>
                 <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="301.0" text="Wyszukaj po filtrze" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="317.0" text="Dodaj pracownika" />
+                  <Button mnemonicParsing="false" onAction="#onAddEmployeeButton" prefHeight="25.0" prefWidth="317.0" text="Dodaj pracownika" />
               </buttons>
                <BorderPane.margin>
                   <Insets right="85.0" />

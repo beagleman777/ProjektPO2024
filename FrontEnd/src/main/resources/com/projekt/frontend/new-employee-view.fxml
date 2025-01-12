@@ -41,7 +41,7 @@
                   <Label text="Telefon" />
                   <TextField fx:id="phoneField" maxWidth="-Infinity" onAction="#onPhoneField" prefWidth="207.0" promptText="Telefon" />
                   <Label text="Data urodzenia" />
-                  <TextField fx:id="birthFIeld" maxWidth="-Infinity" onAction="#onBirthField" prefWidth="207.0" promptText="Data urodzenia" />
+                  <TextField fx:id="birthField" maxWidth="-Infinity" onAction="#onBirthField" prefWidth="207.0" promptText="Data urodzenia" />
                   <Label text="Wynagrodzenie" />
                   <TextField fx:id="salaryField" maxWidth="-Infinity" onAction="#onSalaryField" prefWidth="207.0" promptText="Wynagrodzenie" />
                   <Label text="Dni wolne" />

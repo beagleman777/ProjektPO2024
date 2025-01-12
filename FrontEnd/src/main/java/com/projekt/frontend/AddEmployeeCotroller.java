@@ -4,6 +4,7 @@ import backend.Employee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AddEmployeeCotroller {
     @FXML
@@ -39,6 +40,10 @@ public class AddEmployeeCotroller {
     private String daysOff;
 
     private EmployeeController mainController;
+    private Stage primaryStage;
+    public void setPrimaryStage(Stage stage) {
+        this.primaryStage = stage;
+    }
     public void setMainController(EmployeeController mainController) {this.mainController=mainController;}
     public void initialize() {
         nameField.textProperty().addListener((observable, oldValue, newValue) -> {name=newValue;});
@@ -95,6 +100,8 @@ public class AddEmployeeCotroller {
     }
     @FXML
     public void onAddTheEmployee(ActionEvent event) {
-
+        Float SALARY = Float.parseFloat(salary);
+        Integer DAYSOFF = Integer.parseInt(daysOff);
+        mainController.getNewEmployee(name, surname, pesel, nationality, address, email, phone, birth, SALARY, DAYSOFF);
     }
 }
