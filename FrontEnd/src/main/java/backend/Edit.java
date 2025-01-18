@@ -11,6 +11,12 @@ public class Edit extends Employee {
         edit_name = edit_name_;
     }
 
+    public Edit(){
+        edit_date = "";
+        edit_id = "";
+        edit_name = "";
+    }
+
     public String getEdit_date() {
         return edit_date;
     }
@@ -33,5 +39,11 @@ public class Edit extends Employee {
 
     public void setEdit_name(String edit_name_) {
         edit_name = edit_name_;
+    }
+    //@Override
+    public void toUpperCase(){
+        edit_date = edit_date.toUpperCase();
+        edit_id = edit_id.toUpperCase();
+        edit_name = edit_name.toUpperCase();
     }
 }

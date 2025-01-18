@@ -64,6 +64,8 @@ public class ValidateController implements Serializable {
         for(HR i : hrs){
             System.out.println(i.getLogin() + " " + i.getPassword());
         }
+        loginField.textProperty().addListener((observable, oldValue, newValue) -> {login=newValue;});
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {password=newValue;});
     }
     public boolean currentStaff() {
         return bossOrHR;
@@ -102,15 +104,47 @@ public class ValidateController implements Serializable {
     //logowanie
     @FXML
     public void onLoginField(ActionEvent actionEvent) {
-        loginField.textProperty().addListener((observable, oldValue, newValue) -> {login=newValue;});
+        //loginField.textProperty().addListener((observable, oldValue, newValue) -> {login=newValue;});
+        System.out.println(login);
     }
     @FXML
     public void onPasswordField(ActionEvent actionEvent) {
-        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {password=newValue;});
+        //passwordField.textProperty().addListener((observable, oldValue, newValue) -> {password=newValue;});
+        System.out.println(password);
     }
     @FXML
-    public void onLogIn(ActionEvent actionEvent) {
-        //if()
+    public void onLogIn (ActionEvent actionEvent) throws IOException {
+        if(login == null || password == null){
+            try{
+                throw new ValidatingErrorException("Nie wprowadzono loginu lub hasła!");
+            } catch (ValidatingErrorException e) {}
+        } else if((arePassesCorrectBoss() && bossOrHR==true)){
+            primaryStage.close();
+            EmployeeController employeeController = new EmployeeController();
+            FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("employee-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage employeeStage = new Stage();
+            employeeStage.setTitle("Employee Management System: Boss");
+            employeeStage.setScene(scene);
+            employeeStage.show();
+            employeeController.setPrimaryStage(employeeStage);
+        } else if(arePassesCorrectHR() && bossOrHR==false) {
+            primaryStage.close();
+            EmployeeController employeeController = new EmployeeController();
+            FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("employee-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage employeeStage = new Stage();
+            employeeStage.setTitle("Employee Management System: HR");
+            employeeStage.setScene(scene);
+            employeeStage.show();
+            employeeController.setPrimaryStage(employeeStage);
+        } else {
+            try{
+                throw new ValidatingErrorException("Login lub hasło są niepoprawne!");
+            } catch (ValidatingErrorException e) {}
+        }
     }
     @FXML
     public void onAddBoss(ActionEvent actionEvent) throws IOException{
@@ -125,6 +159,7 @@ public class ValidateController implements Serializable {
         primaryStage.setScene(newScene);
         primaryStage.show();
         secondController.setTheBossStage();
+        getStaffFile();
     }
     @FXML
     public void onAddHR(ActionEvent actionEvent) throws IOException {
@@ -140,6 +175,7 @@ public class ValidateController implements Serializable {
         primaryStage.setScene(newScene);
         primaryStage.show();
         secondController.setTheHRStage();
+        getStaffFile();
     }
     @FXML
     public void onLogAs(ActionEvent actionEvent) {
@@ -175,5 +211,26 @@ public class ValidateController implements Serializable {
         } catch (IOException e){
             System.err.println("Nie ma pliku");
         }
+    }
+
+    private boolean arePassesCorrectBoss() {
+        boolean letLogin = false;
+        for(int i=0; i<bosses.size(); i++){
+            if(bosses.get(i).getLogin().equals(login) && bosses.get(i).getPassword().equals(password)) {
+                letLogin = true;
+                break;
+            }
+        }
+        return letLogin;
+    }
+    private boolean arePassesCorrectHR() {
+        boolean letLogin = false;
+        for(int i=0; i<hrs.size(); i++){
+            if(hrs.get(i).getLogin().equals(login) && hrs.get(i).getPassword().equals(password)) {
+                letLogin = true;
+                break;
+            }
+        }
+        return letLogin;
     }
 }

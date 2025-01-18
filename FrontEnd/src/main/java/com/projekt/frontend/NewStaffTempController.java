@@ -81,12 +81,12 @@ public class NewStaffTempController {
 
         if(newLoginField.getText() == null || newPasswordField.getText() == null || repeatNewPasswordField.getText() == null || newLogin == null || newPassword == null || repeatNewPassword == null) {
             try{
-                throw new CreatingStaffException("Nie wprowadzono loginu lub haseł!");
-            } catch (CreatingStaffException e) {}
+                throw new ValidatingErrorException("Nie wprowadzono loginu lub haseł!");
+            } catch (ValidatingErrorException e) {}
         } else if (!(newPassword.equals(repeatNewPassword))) {
             try{
-                throw new CreatingStaffException("Podane hasła nie zgadzają się!");
-            } catch (CreatingStaffException e) {}
+                throw new ValidatingErrorException("Podane hasła nie zgadzają się!");
+            } catch (ValidatingErrorException e) {}
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("validate-view.fxml"));
             Parent newRoot = fxmlLoader.load();

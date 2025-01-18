@@ -47,4 +47,10 @@ public class Boss {
         System.out.println("Login: " + login);
         System.out.println("Password: " + password);
     }
+    public ArrayList<Employee> getEmployees(){
+        return Employees;
+    }
+    public void setEmployees(ArrayList<Employee> employees){
+        Employees = employees;
+    }
 }
