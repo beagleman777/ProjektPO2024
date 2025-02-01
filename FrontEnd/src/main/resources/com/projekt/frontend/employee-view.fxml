@@ -5,27 +5,34 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.EmployeeController">
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.EmployeeController">
    <content>
       <BorderPane>
          <center>
-            <TableView fx:id="employeeTable" BorderPane.alignment="CENTER">
-              <columns>
-                  <TableColumn fx:id="tableID" prefWidth="75.0" text="ID" />
-                  <TableColumn fx:id="tableName" prefWidth="99.0" text=" Imię (Imiona)" />
-                  <TableColumn fx:id="tableSurname" prefWidth="60.0" text="Nazwisko" />
-                <TableColumn fx:id="tablePESEL" prefWidth="86.0" text="PESEL" />
-                <TableColumn fx:id="tableNationality" prefWidth="79.0" text="Narodowość" />
-                  <TableColumn fx:id="tableAddress" prefWidth="51.0" text="Adres" />
-                  <TableColumn fx:id="tableEmail" prefWidth="75.0" text="Email" />
-                  <TableColumn fx:id="tablePhone" prefWidth="75.0" text="Telefon" />
-                  <TableColumn fx:id="tableBirth" prefWidth="105.0" text="Data urodzenia" />
-                  <TableColumn fx:id="tableSalary" prefWidth="104.0" text="Wynagrodzenie" />
-                  <TableColumn fx:id="tableDaysoff" prefWidth="68.0" text="Dni wolne" />
-                  <TableColumn fx:id="tableEDIT" prefWidth="73.0" text="EDYTUJ" />
-                  <TableColumn fx:id="tableFIRE" prefWidth="88.0" text="ZWOLNIJ" />
-              </columns>
-            </TableView>
+            <ScrollPane hbarPolicy="NEVER" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <TableView fx:id="employeeTable" minWidth="1038.0">
+                    <columns>
+                        <TableColumn fx:id="tableID" minWidth="75.0" text="ID" />
+                        <TableColumn fx:id="tableName" minWidth="99.0" text=" Imię (Imiona)" />
+                        <TableColumn fx:id="tableSurname" minWidth="60.0" text="Nazwisko" />
+                        <TableColumn fx:id="tablePESEL" minWidth="86.0" text="PESEL" />
+                        <TableColumn fx:id="tableNationality" minWidth="79.0" text="Narodowość" />
+                        <TableColumn fx:id="tableAddress" minWidth="51.0" text="Adres" />
+                        <TableColumn fx:id="tableEmail" minWidth="75.0" text="Email" />
+                        <TableColumn fx:id="tablePhone" minWidth="75.0" text="Telefon" />
+                        <TableColumn fx:id="tableBirth" minWidth="105.0" text="Data urodzenia" />
+                        <TableColumn fx:id="tableSalary" minWidth="104.0" text="Wynagrodzenie" />
+                        <TableColumn fx:id="tableDaysoff" minWidth="68.0" text="Dni wolne" />
+                        <TableColumn fx:id="tableEDIT" minWidth="73.0" text="EDYTUJ" />
+                        <TableColumn fx:id="tableFIRE" minWidth="88.0" text="ZWOLNIJ" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </content>
+            </ScrollPane>
          </center>
          <top>
             <Label text="System Zarządzania Pracownikami" BorderPane.alignment="CENTER">
@@ -35,10 +42,11 @@
             </Label>
          </top>
          <bottom>
-            <ButtonBar prefHeight="40.0" prefWidth="837.0" BorderPane.alignment="CENTER">
+            <ButtonBar buttonMinWidth="110.0" prefHeight="40.0" BorderPane.alignment="CENTER">
               <buttons>
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="301.0" text="Wyszukaj po filtrze" />
-                  <Button mnemonicParsing="false" onAction="#onAddEmployeeButton" prefHeight="25.0" prefWidth="317.0" text="Dodaj pracownika" />
+                <Button minWidth="301.0" mnemonicParsing="false" prefHeight="25.0" text="Wyszukaj po filtrze" />
+                  <Button minWidth="317.0" mnemonicParsing="false" onAction="#onAddEmployeeButton" prefHeight="25.0" text="Dodaj pracownika" />
+                  <Button mnemonicParsing="false" onAction="#onExitButton" prefHeight="25.0" text="Wyjdź" />
               </buttons>
                <BorderPane.margin>
                   <Insets right="85.0" />

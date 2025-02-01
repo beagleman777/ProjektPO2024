@@ -13,6 +13,7 @@ import javafx.stage.*;
 public class ValidateController implements Serializable {
     //Back
     private Stage primaryStage;
+    private Stage employeeStage;
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }
@@ -120,26 +121,19 @@ public class ValidateController implements Serializable {
             } catch (ValidatingErrorException e) {}
         } else if((arePassesCorrectBoss() && bossOrHR==true)){
             primaryStage.close();
-            EmployeeController employeeController = new EmployeeController();
             FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("employee-view.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            Stage employeeStage = new Stage();
-            employeeStage.setTitle("Employee Management System: Boss");
+            employeeStage = new Stage();
+            EmployeeController employeeController = fxmlLoader.getController();
+            employeeController.setMainController(this);
+            if(bossOrHR){
+                employeeStage.setTitle("Employee Management System: Boss");
+            } else {
+                employeeStage.setTitle("Employee Management System: HR");
+            }
             employeeStage.setScene(scene);
             employeeStage.show();
-            employeeController.setPrimaryStage(employeeStage);
-        } else if(arePassesCorrectHR() && bossOrHR==false) {
-            primaryStage.close();
-            EmployeeController employeeController = new EmployeeController();
-            FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("employee-view.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            Stage employeeStage = new Stage();
-            employeeStage.setTitle("Employee Management System: HR");
-            employeeStage.setScene(scene);
-            employeeStage.show();
-            employeeController.setPrimaryStage(employeeStage);
         } else {
             try{
                 throw new ValidatingErrorException("Login lub hasło są niepoprawne!");
@@ -232,5 +226,8 @@ public class ValidateController implements Serializable {
             }
         }
         return letLogin;
+    }
+    public void closeApp(){
+        employeeStage.close();
     }
 }

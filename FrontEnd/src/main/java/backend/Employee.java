@@ -12,6 +12,7 @@ public class Employee {
     private String birth_date;
     private Float salary;
     private Integer daysOff;
+    private String position;
     //String pattern = "dd-MM-yyyy";
     //LocalDateTime localDateTime;
     //localdatetime.pa
@@ -106,6 +107,12 @@ public class Employee {
     public void setDaysOff(Integer daysOff_) {
         daysOff = daysOff_;
     }
+    public String getPosition(){
+        return position;
+    }
+    public void setPosition(String position) {
+        this.position = position;
+    }
     public void printEmployeeInfo() {
         System.out.print("ID: " + getIdNum() + "   ");
         System.out.print("Name: " + getName() + "   ");
@@ -118,5 +125,6 @@ public class Employee {
         System.out.print("Birth Date: " + getBirth_date() + "   ");
         System.out.print("Salary: " + getSalary() + "   ");
         System.out.print("Days Off: " + getDaysOff() + "\n");
+        System.out.print("Position: " + getDaysOff() + "\n");
     }
 }

@@ -31,11 +31,10 @@ class EmployeeDataHandler {
 }
 
 public class EmployeeController {
-    private Stage primaryStage;
-    public void setPrimaryStage(Stage stage) {
-        this.primaryStage = stage;
+    private ValidateController mainController;
+    public void setMainController(ValidateController mainController_) {
+        this.mainController = mainController_;
     }
-
     @FXML
     private TableView<Employee> employeeTable;
     @FXML
@@ -101,7 +100,7 @@ public class EmployeeController {
             {
                 editButton.setOnAction(event -> {
                     Employee employee = getTableView().getItems().get(getIndex());
-                    HR.employeeUpdate(employee, "WYPlATA"); // Call your edit logic
+                    //HR.employeeUpdate(employee, "WYPlATA"); // Call your edit logic
                 });
             }
             @Override
@@ -139,6 +138,22 @@ public class EmployeeController {
                 }
             }
         });
+
+        /*tableID.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.05));
+        tableName.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.05));
+        tableSurname.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.1));
+        tablePESEL.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.1));
+        tableNationality.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.05));
+        tableAddress.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.1));
+        tableEmail.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.1));
+        tablePhone.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.1));
+        tableBirth.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.1));
+        tableSalary.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.1));
+        tableDaysoff.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.05));
+        tableEDIT.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.05));
+        tableFIRE.prefWidthProperty().bind(employeeTable.widthProperty().multiply(0.05));
+        */
+        employeeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         // Load employees from JSON
         InputStream inputStream = Employee.class.getClassLoader().getResourceAsStream("employees.json");
         if (inputStream == null) {
@@ -155,7 +170,7 @@ public class EmployeeController {
         }
 
         System.out.println("Employees loaded from file");
-        employeeList.add(emp);
+        //employeeList.add(emp);
         employeeTable.setItems(employeeList);
     }
     Stage tempStage = new Stage();
@@ -192,5 +207,8 @@ public class EmployeeController {
         } catch(IOException en){
             en.printStackTrace();
         }
+    }
+    public void onExitButton(ActionEvent actionEvent){
+        mainController.closeApp();
     }
 }
