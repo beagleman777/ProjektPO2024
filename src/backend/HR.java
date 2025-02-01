@@ -1,22 +1,23 @@
 package backend;
+
 import java.util.Random;
 import java.util.Date;
 
-public class HR extends Boss{
-    public void employeeAdd(Employee e){
+public class HR extends Boss {
+    public void employeeAdd(Employee e) {
         Employees.add(e);
         System.out.println("Dodano nowego pracownika");
     }
 
-    public void employeeRemove(Employee e){
+    public void employeeRemove(Employee e) {
         Employees.remove(e);
         System.out.println("Usunięto pracownika z bazy danych");
     }
 
-    public void employeeUpdate(Employee e, String edit_type){
+    public void employeeUpdate(Employee e, String edit_type) {
         edit_type = edit_type.toUpperCase();
         Random rand = new Random();
-        switch(edit_type) {
+        switch (edit_type) {
             case "NAZWISKO":
                 System.out.print("Zmień nazwisko na: ");
                 String surname = "Gaweł";
