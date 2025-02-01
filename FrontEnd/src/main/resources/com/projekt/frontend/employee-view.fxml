@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.EmployeeController">
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.EmployeeController">
    <content>
       <BorderPane>
          <center>
-            <ScrollPane hbarPolicy="NEVER" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+            <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
                <content>
-                  <TableView fx:id="employeeTable" minWidth="1038.0">
+                  <TableView fx:id="employeeTable">
                     <columns>
                         <TableColumn fx:id="tableID" minWidth="75.0" text="ID" />
                         <TableColumn fx:id="tableName" minWidth="99.0" text=" Imię (Imiona)" />
@@ -24,6 +24,7 @@
                         <TableColumn fx:id="tableBirth" minWidth="105.0" text="Data urodzenia" />
                         <TableColumn fx:id="tableSalary" minWidth="104.0" text="Wynagrodzenie" />
                         <TableColumn fx:id="tableDaysoff" minWidth="68.0" text="Dni wolne" />
+                        <TableColumn fx:id="tablePosition" minWidth="80.0" text="Stanowisko" />
                         <TableColumn fx:id="tableEDIT" minWidth="73.0" text="EDYTUJ" />
                         <TableColumn fx:id="tableFIRE" minWidth="88.0" text="ZWOLNIJ" />
                     </columns>
@@ -44,7 +45,7 @@
          <bottom>
             <ButtonBar buttonMinWidth="110.0" prefHeight="40.0" BorderPane.alignment="CENTER">
               <buttons>
-                <Button minWidth="301.0" mnemonicParsing="false" prefHeight="25.0" text="Wyszukaj po filtrze" />
+                <Button minWidth="301.0" mnemonicParsing="false" onAction="#onSearchByFilter" prefHeight="25.0" text="Wyszukaj po filtrze" />
                   <Button minWidth="317.0" mnemonicParsing="false" onAction="#onAddEmployeeButton" prefHeight="25.0" text="Dodaj pracownika" />
                   <Button mnemonicParsing="false" onAction="#onExitButton" prefHeight="25.0" text="Wyjdź" />
               </buttons>

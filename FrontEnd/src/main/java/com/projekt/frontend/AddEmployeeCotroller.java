@@ -27,6 +27,8 @@ public class AddEmployeeCotroller {
     private TextField salaryField;
     @FXML
     private TextField daysoffField;
+    @FXML
+    private TextField positionField;
 
     private String name;
     private String surname;
@@ -38,6 +40,7 @@ public class AddEmployeeCotroller {
     private String birth;
     private String salary;
     private String daysOff;
+    private String position;
 
     private EmployeeController mainController;
     private Stage primaryStage;
@@ -56,6 +59,7 @@ public class AddEmployeeCotroller {
         birthField.textProperty().addListener((observable, oldValue, newValue) -> {birth=newValue;});
         salaryField.textProperty().addListener((observable, oldValue, newValue) -> {salary=newValue;});
         daysoffField.textProperty().addListener((observable, oldValue, newValue) -> {daysOff=newValue;});
+        positionField.textProperty().addListener((observable, oldValue, newValue) -> {position=newValue;});
     }
 
     @FXML
@@ -102,6 +106,6 @@ public class AddEmployeeCotroller {
     public void onAddTheEmployee(ActionEvent event) {
         Float SALARY = Float.parseFloat(salary);
         Integer DAYSOFF = Integer.parseInt(daysOff);
-        mainController.getNewEmployee(name, surname, pesel, nationality, address, email, phone, birth, SALARY, DAYSOFF);
+        mainController.getNewEmployee(name, surname, pesel, nationality, address, email, phone, birth, SALARY, DAYSOFF, position);
     }
 }

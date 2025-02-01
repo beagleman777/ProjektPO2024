@@ -2,6 +2,7 @@ module com.projekt.frontend {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
+    requires jdk.nio.mapmode;
     opens com.projekt.frontend to javafx.fxml;
     exports com.projekt.frontend;
 

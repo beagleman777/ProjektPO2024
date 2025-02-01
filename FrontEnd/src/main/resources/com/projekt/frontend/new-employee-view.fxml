@@ -46,6 +46,8 @@
                   <TextField fx:id="salaryField" maxWidth="-Infinity" onAction="#onSalaryField" prefWidth="207.0" promptText="Wynagrodzenie" />
                   <Label text="Dni wolne" />
                   <TextField fx:id="daysoffField" maxWidth="-Infinity" onAction="#onDaysoffField" prefWidth="207.0" promptText="Dni wolne" />
+                  <Label text="Label" />
+                  <TextField fx:id="positionField" onAction="#onPositionField" />
                </children>
             </VBox>
          </center>

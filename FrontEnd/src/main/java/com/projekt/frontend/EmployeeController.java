@@ -60,15 +60,17 @@ public class EmployeeController {
     @FXML
     private TableColumn<Employee, Integer> tableDaysoff;
     @FXML
+    private TableColumn<Employee, String> tablePosition;
+    @FXML
     private TableColumn<Employee, Void> tableEDIT;
     @FXML
     private TableColumn<Employee, Void> tableFIRE;
 
-    //public Boss boss = new Boss();
-    //boss
     private ArrayList<Employee> employees = new ArrayList<>();
     private ObservableList<Employee> employeeList = FXCollections.observableArrayList();
-    Employee emp = new Employee(12, "dekiel", "wątły", "1293939393", "Masrjanin", "nie ma", "marsandstars@gmail.gay", "samsung galaksi 2", "wczoraj", (float)99222, 365);
+
+    public Boss boss = new Boss();
+    Employee emp = new Employee(12, "dekiel", "wątły", "1293939393", "Masrjanin", "nie ma", "marsandstars@gmail.gay", "samsung galaksi 2", "wczoraj", (float)99222, 365, "walkman");
 
     private String name;
     private String surname;
@@ -80,6 +82,7 @@ public class EmployeeController {
     private String birth;
     private Float salary;
     private Integer daysoff;
+    private String position;
     public void initialize() throws IOException {
         //załadowanie danych tabeli
         tableID.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getIdNum()));
@@ -93,7 +96,7 @@ public class EmployeeController {
         tableBirth.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getBirth_date()));
         tableSalary.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getSalary()));
         tableDaysoff.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getDaysOff()));
-
+        tablePosition.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getPosition()));
 
         tableEDIT.setCellFactory(column -> new TableCell<>() {
             private final Button editButton = new Button("Edytuj");
@@ -172,6 +175,7 @@ public class EmployeeController {
         System.out.println("Employees loaded from file");
         //employeeList.add(emp);
         employeeTable.setItems(employeeList);
+        boss.setEmployees(employees);
     }
     Stage tempStage = new Stage();
     public void onAddEmployeeButton(ActionEvent actionEvent) throws IOException {
@@ -184,10 +188,10 @@ public class EmployeeController {
         tempStage.setScene(scene);
         tempStage.show();
     }
-    public void getNewEmployee(String newName, String newSurname, String newPESEL, String newNationality, String newAddress, String newEmail, String newPhone, String newBirthDate, Float newSalary, Integer newDaysoff){
+    public void getNewEmployee(String newName, String newSurname, String newPESEL, String newNationality, String newAddress, String newEmail, String newPhone, String newBirthDate, Float newSalary, Integer newDaysoff, String newPosition){
         tempStage.close();
         Random rand = new Random();
-        Employee e = new Employee(rand.nextInt(10000),newName, newSurname, newPESEL, newNationality, newAddress, newEmail, newPhone, newBirthDate, newSalary, newDaysoff);
+        Employee e = new Employee(rand.nextInt(10000),newName, newSurname, newPESEL, newNationality, newAddress, newEmail, newPhone, newBirthDate, newSalary, newDaysoff, newPosition);
         name=null;
         surname=null;
         pesel=null;
@@ -198,6 +202,7 @@ public class EmployeeController {
         birth=null;
         salary=null;
         daysoff=null;
+        position=null;
         employeeList.add(e);
         employeeTable.setItems(employeeList);
         // Save employees to JSON
@@ -207,6 +212,27 @@ public class EmployeeController {
         } catch(IOException en){
             en.printStackTrace();
         }
+    }
+    public Boss getBoss(){
+        return boss;
+    }
+    Stage tempStage2 = new Stage();
+    @FXML
+    public void onSearchByFilter(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("filter-search-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        FilterSearchController controller = fxmlLoader.getController();
+        controller.setMainController(this);
+        tempStage2.setTitle("Search your Employee!");
+        tempStage2.setScene(scene);
+        tempStage2.show();
+    }
+    public void doneFiltering(ArrayList<Employee> searches){
+        tempStage2.close();
+        ObservableList<Employee> search=FXCollections.observableArrayList();
+        search.addAll(searches);
+        employeeTable.setItems(search);
     }
     public void onExitButton(ActionEvent actionEvent){
         mainController.closeApp();
