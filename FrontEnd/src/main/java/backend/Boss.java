@@ -33,10 +33,11 @@ public class Boss {
         password = password_;
     }
 
-    public void listAll() {
+    public ArrayList<Employee> listAll() {
         for (Employee e : Employees) {
             e.printEmployeeInfo();
         }
+        return Employees;
     }
 
     public ArrayList<Employee> listSome(String search_name, String search) {

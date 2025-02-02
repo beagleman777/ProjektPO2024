@@ -126,7 +126,7 @@ public class FilterSearchController {
         } else {
             f.setSalary(Float.parseFloat(salary));
         }
-        if(salary==null){
+        if(daysOff==null){
             f.setDaysOff(-1);
         } else {
             f.setDaysOff(Integer.parseInt(daysOff));
@@ -152,14 +152,17 @@ public class FilterSearchController {
         } else {
             searches.add(temp.get(0));
             for(int i=1; i<temp.size(); i++) {
+                int counter=0;
                 for(int j=0; j<searches.size(); j++) {
                     if(searches.get(j).getIdNum()!=temp.get(i).getIdNum()) {
-                        searches.add(temp.get(i));
+                        counter++;
                     }
+                }
+                if(counter==searches.size()) {
+                    searches.add(temp.get(i));
                 }
             }
         }
-        System.out.println(searches);
         mainController.doneFiltering(searches);
     }
 }

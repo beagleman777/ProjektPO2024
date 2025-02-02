@@ -230,9 +230,16 @@ public class EmployeeController {
     }
     public void doneFiltering(ArrayList<Employee> searches){
         tempStage2.close();
-        ObservableList<Employee> search=FXCollections.observableArrayList();
-        search.addAll(searches);
-        employeeTable.setItems(search);
+        //ObservableList<Employee> search=FXCollections.observableArrayList();
+        employeeList.setAll(searches);
+        employeeTable.setItems(employeeList);
+    }
+    @FXML
+    public void onPrintAllEmployees(ActionEvent actionEvent){
+        //employeeList.clear();
+        //ObservableList<Employee> all=FXCollections.observableArrayList();
+        employeeList.setAll(boss.getEmployees());
+        employeeTable.setItems(employeeList);
     }
     public void onExitButton(ActionEvent actionEvent){
         mainController.closeApp();
