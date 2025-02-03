@@ -6,7 +6,7 @@
 
 <ScrollPane prefHeight="420.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.AddEmployeeCotroller">
    <content>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="538.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="538.0">
          <top>
             <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
                <children>
@@ -24,7 +24,7 @@
             </VBox>
          </top>
          <center>
-            <VBox alignment="TOP_CENTER" prefHeight="430.0" prefWidth="747.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="483.0" prefWidth="529.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Imię" />
                   <TextField fx:id="nameField" maxWidth="-Infinity" onAction="#onNameField" prefWidth="207.0" promptText="Imię" />
@@ -46,8 +46,8 @@
                   <TextField fx:id="salaryField" maxWidth="-Infinity" onAction="#onSalaryField" prefWidth="207.0" promptText="Wynagrodzenie" />
                   <Label text="Dni wolne" />
                   <TextField fx:id="daysoffField" maxWidth="-Infinity" onAction="#onDaysoffField" prefWidth="207.0" promptText="Dni wolne" />
-                  <Label text="Label" />
-                  <TextField fx:id="positionField" onAction="#onPositionField" />
+                  <Label text="Stanowisko" />
+                  <TextField fx:id="positionField" maxWidth="-Infinity" onAction="#onPositionField" prefWidth="207.0" promptText="Stanowisko" />
                </children>
             </VBox>
          </center>

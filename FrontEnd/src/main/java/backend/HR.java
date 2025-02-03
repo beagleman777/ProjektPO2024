@@ -16,7 +16,7 @@ public class HR extends Boss {
         System.out.println("Usunięto pracownika z bazy danych");
     }
 
-    public static void employeeUpdate(Employee e, String edit_type, String input) {
+    public static Employee employeeUpdate(Employee e, String edit_type, String input) {
         Random rand = new Random();
         Edit ed = new Edit();
         //ed.toUpperCase();
@@ -27,6 +27,7 @@ public class HR extends Boss {
                 ed.setEdit_date(String.valueOf(new Date()));
                 ed.setEdit_id(Integer.toString(rand.nextInt(100000000)));
                 ed.setEdit_name("Zmieniono stanowisko na " + position);
+                break;
             case "WYPLATA":
                 System.out.print("Zmień wypłatę na: ");
                 Float salary = Float.parseFloat(input);
@@ -34,6 +35,7 @@ public class HR extends Boss {
                 ed.setEdit_date(String.valueOf(new Date()));
                 ed.setEdit_id(Integer.toString(rand.nextInt(100000000)));
                 ed.setEdit_name("Zmieniono wypłatę na " + salary);
+                break;
             case "DNI WOLNE":
                 System.out.print("Ile dni wolnych: ");
                 Integer days_off = Integer.parseInt(input);
@@ -41,7 +43,9 @@ public class HR extends Boss {
                 ed.setEdit_date(String.valueOf(new Date()));
                 ed.setEdit_id(Integer.toString(rand.nextInt(100000000)));
                 ed.setEdit_name("Zmieniono liczbę dni wolnych na: " + days_off);
+                break;
         }
+        return ed;
     }
     public ArrayList<Employee> getEmployees(){
         return Employees;

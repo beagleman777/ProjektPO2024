@@ -1,12 +1,12 @@
 package com.projekt.frontend;
 
-import backend.Employee;
+import backend.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class AddEmployeeCotroller {
+public class EditEmployeeController {
+    Employee editEmp = new Employee();
     @FXML
     private TextField nameField;
     @FXML
@@ -30,38 +30,28 @@ public class AddEmployeeCotroller {
     @FXML
     private TextField positionField;
 
-    private String name;
-    private String surname;
-    private String pesel;
-    private String nationality;
-    private String address;
-    private String email;
-    private String phone;
-    private String birth;
-    private String salary;
-    private String daysOff;
-    private String position;
+    private String salary=null;
+    private String daysOff=null;
+    private String position=null;
 
     private EmployeeController mainController;
-    private Stage primaryStage;
-    public void setPrimaryStage(Stage stage) {
-        this.primaryStage = stage;
-    }
     public void setMainController(EmployeeController mainController) {this.mainController=mainController;}
     public void initialize() {
-        nameField.textProperty().addListener((observable, oldValue, newValue) -> {name=newValue;});
-        surnameField.textProperty().addListener((observable, oldValue, newValue) -> {surname=newValue;});
-        peselField.textProperty().addListener((observable, oldValue, newValue) -> {pesel=newValue;});
-        nationalityField.textProperty().addListener((observable, oldValue, newValue) -> {nationality=newValue;});
-        addressField.textProperty().addListener((observable, oldValue, newValue) -> {address=newValue;});
-        emailField.textProperty().addListener((observable, oldValue, newValue) -> {email=newValue;});
-        phoneField.textProperty().addListener((observable, oldValue, newValue) -> {phone=newValue;});
-        birthField.textProperty().addListener((observable, oldValue, newValue) -> {birth=newValue;});
+        nameField.setText(editEmp.getName());
+        surnameField.setText(editEmp.getSurname());
+        peselField.setText(editEmp.getPesel());
+        nationalityField.setText(editEmp.getNationality());
+        addressField.setText(editEmp.getAddress());
+        emailField.setText(editEmp.getEmail());
+        phoneField.setText(editEmp.getPhone());
+        birthField.setText(editEmp.getBirth_date());
         salaryField.textProperty().addListener((observable, oldValue, newValue) -> {salary=newValue;});
         daysoffField.textProperty().addListener((observable, oldValue, newValue) -> {daysOff=newValue;});
         positionField.textProperty().addListener((observable, oldValue, newValue) -> {position=newValue;});
     }
-
+    public void forwardEmployee(Employee employee) {
+        this.editEmp=employee;
+    }
     @FXML
     public void onNameField(ActionEvent event) {
 
@@ -103,13 +93,23 @@ public class AddEmployeeCotroller {
 
     }
     @FXML
-    public void onPositionField(ActionEvent actionEvent){
+    public void onPositionField(ActionEvent event) {
 
     }
     @FXML
-    public void onAddTheEmployee(ActionEvent event) {
-        Float SALARY = Float.parseFloat(salary);
-        Integer DAYSOFF = Integer.parseInt(daysOff);
-        mainController.getNewEmployee(name, surname, pesel, nationality, address, email, phone, birth, SALARY, DAYSOFF, position);
+    public void onEditEmployee(ActionEvent event) {
+        if(salary!=null) {
+            HR.employeeUpdate(editEmp, "WYPLATA", salary);
+            salary=null;
+        }
+        if(daysOff!=null) {
+            HR.employeeUpdate(editEmp, "DNI WOLNE", daysOff);
+            daysOff=null;
+        }
+        if(position!=null) {
+            HR.employeeUpdate(editEmp,"STANOWISKO", position);
+            position=null;
+        }
+        mainController.doneEditing(editEmp);
     }
 }

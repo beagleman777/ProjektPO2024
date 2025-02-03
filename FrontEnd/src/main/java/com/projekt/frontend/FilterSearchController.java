@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import jdk.nio.mapmode.ExtendedMapMode;
 
 import java.util.ArrayList;
 
@@ -121,6 +120,13 @@ public class FilterSearchController {
         f.setEmail(email);
         f.setPhone(phone);
         f.setBirth_date(birth);
+        if(salary!=null){
+            f.setSalary(Float.parseFloat(salary));
+        }
+        if(daysOff!=null){
+            f.setDaysOff(Integer.parseInt(daysOff));
+        }
+        f.setPosition(position);
         if(salary==null){
             f.setSalary(-1f);
         } else {
@@ -143,7 +149,7 @@ public class FilterSearchController {
         temp.addAll(mainController.getBoss().listSome("EMAIL", f.getEmail()));
         temp.addAll(mainController.getBoss().listSome("TELEFON", f.getPhone()));
         temp.addAll(mainController.getBoss().listSome("DATA URODZENIA", f.getBirth_date()));
-        temp.addAll(mainController.getBoss().listSome("WYPŁATA", String.valueOf(f.getSalary())));
+        temp.addAll(mainController.getBoss().listSome("WYPLATA", String.valueOf(f.getSalary())));
         temp.addAll(mainController.getBoss().listSome("DNI WOLNE", String.valueOf(f.getDaysOff())));
         temp.addAll(mainController.getBoss().listSome("STANOWISKO", f.getPosition()));
         if(temp.size()==0){

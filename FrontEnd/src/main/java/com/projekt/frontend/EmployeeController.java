@@ -31,6 +31,7 @@ class EmployeeDataHandler {
 }
 
 public class EmployeeController {
+    String filePath = "src/main/resources/employees.json";
     private ValidateController mainController;
     public void setMainController(ValidateController mainController_) {
         this.mainController = mainController_;
@@ -103,7 +104,11 @@ public class EmployeeController {
             {
                 editButton.setOnAction(event -> {
                     Employee employee = getTableView().getItems().get(getIndex());
-                    //HR.employeeUpdate(employee, "WYPlATA"); // Call your edit logic
+                    try {
+                        editingEmployee(employee);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
             }
             @Override
@@ -121,14 +126,8 @@ public class EmployeeController {
             {
                 removeButton.setOnAction(event -> {
                     Employee employee = getTableView().getItems().get(getIndex());
-                    employeeList.remove(employee); // Remove employee from the list
-                    employees.remove(employee);
-                    try{
-                        EmployeeDataHandler.saveEmployeesToFile(employeeList, "D:/Pro(JAVA)ects/ProjektPO2024/FrontEnd/src/main/resources/employees.json");
-                        System.out.println("Employees saved to file.");
-                    } catch(IOException en){
-                        en.printStackTrace();
-                    }
+                    employeeList.remove(employee);
+                    boss.getEmployees().remove(employee);
                 });
             }
             @Override
@@ -165,7 +164,7 @@ public class EmployeeController {
 
         if (inputStream.available() != 0) {
             try {
-                employees = (ArrayList<Employee>) EmployeeDataHandler.loadEmployeesFromFile("D:/Pro(JAVA)ects/ProjektPO2024/FrontEnd/src/main/resources/employees.json");
+                employees = (ArrayList<Employee>) EmployeeDataHandler.loadEmployeesFromFile(filePath);
                 employeeList.addAll(employees);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -176,6 +175,7 @@ public class EmployeeController {
         //employeeList.add(emp);
         employeeTable.setItems(employeeList);
         boss.setEmployees(employees);
+        employees = null;
     }
     Stage tempStage = new Stage();
     public void onAddEmployeeButton(ActionEvent actionEvent) throws IOException {
@@ -191,7 +191,7 @@ public class EmployeeController {
     public void getNewEmployee(String newName, String newSurname, String newPESEL, String newNationality, String newAddress, String newEmail, String newPhone, String newBirthDate, Float newSalary, Integer newDaysoff, String newPosition){
         tempStage.close();
         Random rand = new Random();
-        Employee e = new Employee(rand.nextInt(10000),newName, newSurname, newPESEL, newNationality, newAddress, newEmail, newPhone, newBirthDate, newSalary, newDaysoff, newPosition);
+        Employee e = new Employee(rand.nextInt(1000000),newName, newSurname, newPESEL, newNationality, newAddress, newEmail, newPhone, newBirthDate, newSalary, newDaysoff, newPosition);
         name=null;
         surname=null;
         pesel=null;
@@ -204,10 +204,12 @@ public class EmployeeController {
         daysoff=null;
         position=null;
         employeeList.add(e);
+        boss.getEmployees().add(e);
         employeeTable.setItems(employeeList);
+        employeeTable.refresh();
         // Save employees to JSON
         try{
-            EmployeeDataHandler.saveEmployeesToFile(employeeList, "D:/Pro(JAVA)ects/ProjektPO2024/FrontEnd/src/main/resources/employees.json");
+            EmployeeDataHandler.saveEmployeesToFile(employeeList, filePath);
             System.out.println("Employees saved to file.");
         } catch(IOException en){
             en.printStackTrace();
@@ -240,6 +242,34 @@ public class EmployeeController {
         //ObservableList<Employee> all=FXCollections.observableArrayList();
         employeeList.setAll(boss.getEmployees());
         employeeTable.setItems(employeeList);
+    }
+    Stage tempStage3 = new Stage();
+    Employee currentEditedEmployee = null;
+    public void editingEmployee(Employee employee) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("edit-employee-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        currentEditedEmployee = employee;
+        EditEmployeeController controller = fxmlLoader.getController();
+        controller.setMainController(this);
+        controller.forwardEmployee(employee);
+        controller.initialize();
+        tempStage3.setTitle("Edit your Employee!");
+        tempStage3.setScene(scene);
+        tempStage3.show();
+    }
+    public void doneEditing(Employee editedEmp){
+        tempStage3.close();
+        employeeTable.refresh();
+        int index = employeeList.indexOf(currentEditedEmployee);
+        employeeList.set(index, editedEmp);
+        currentEditedEmployee=null;
+        try{
+            EmployeeDataHandler.saveEmployeesToFile(employeeList, filePath);
+            System.out.println("Employees saved to file.");
+        } catch(IOException en){
+            en.printStackTrace();
+        }
     }
     public void onExitButton(ActionEvent actionEvent){
         mainController.closeApp();

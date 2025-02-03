@@ -109,18 +109,20 @@ public class Boss {
                 }
                 Filter f8 = new Filter(new Date(), rand.nextInt(1000000000), "Filtrowanie rekordów po dacie urodzenia");
                 break;
-            case "WYPŁATA":
+            case "WYPLATA":
                 String salary = search;
+                float floatSalary = Float.parseFloat(salary);
                 for (Employee e : Employees) {
-                    if (e.getEmail().equals(salary))
+                    if (e.getSalary().equals(floatSalary))
                         Employees_Filtered.add(e);
                 }
                 Filter f9 = new Filter(new Date(), rand.nextInt(1000000000), "Filtrowanie rekordów po wynagrodzeniu");
                 break;
             case "DNI WOLNE":
                 String daysOff = search;
+                int intDaysOff = Integer.parseInt(daysOff);
                 for (Employee e : Employees) {
-                    if (e.getEmail().equals(daysOff))
+                    if (e.getDaysOff().equals(intDaysOff))
                         Employees_Filtered.add(e);
                 }
                 Filter f10 = new Filter(new Date(), rand.nextInt(1000000000), "Filtrowanie rekordów po emailu");
@@ -128,7 +130,7 @@ public class Boss {
             case "STANOWISKO":
                 String position = search;
                 for (Employee e : Employees) {
-                    if (e.getEmail().equals(position))
+                    if (e.getPosition().equals(position))
                         Employees_Filtered.add(e);
                 }
                 Filter f11 = new Filter(new Date(), rand.nextInt(1000000000), "Filtrowanie rekordów po stanowisku");
