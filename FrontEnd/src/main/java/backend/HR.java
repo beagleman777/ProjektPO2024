@@ -16,7 +16,7 @@ public class HR extends Boss {
         System.out.println("Usunięto pracownika z bazy danych");
     }
 
-    public static Employee employeeUpdate(Employee e, String edit_type, String input) {
+    public static Edit employeeUpdate(Employee e, String edit_type, String input) {
         Random rand = new Random();
         Edit ed = new Edit();
         //ed.toUpperCase();

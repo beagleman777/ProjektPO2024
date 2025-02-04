@@ -20,7 +20,7 @@ import java.util.Random;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 
-class EmployeeDataHandler {
+class DataHandler {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     public static void saveEmployeesToFile(List<Employee> employees, String filePath) throws IOException {
         objectMapper.writeValue(new File(filePath), employees);
@@ -28,10 +28,24 @@ class EmployeeDataHandler {
     public static List<Employee> loadEmployeesFromFile(String filePath) throws IOException {
         return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, Employee.class));
     }
+    public static void saveFiltersToFile(List<Filter> filters, String filePath) throws IOException {
+        objectMapper.writeValue(new File(filePath), filters);
+    }
+    public static List<Filter> loadFiltersFromFile(String filePath) throws IOException {
+        return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, Filter.class));
+    }
+    public static void saveEditsToFile(ArrayList<Edit> edits, String filePath) throws IOException {
+        objectMapper.writeValue(new File(filePath), edits);
+    }
+    public static List<Edit> loadEditsFromFile(String filePath) throws IOException {
+        return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, Edit.class));
+    }
 }
 
 public class EmployeeController {
     String filePath = "src/main/resources/employees.json";
+    String filtersPath = "src/main/resources/filters.json";
+    String editsPath = "src/main/resources/edits.json";
     private ValidateController mainController;
     public void setMainController(ValidateController mainController_) {
         this.mainController = mainController_;
@@ -68,8 +82,11 @@ public class EmployeeController {
     private TableColumn<Employee, Void> tableFIRE;
 
     private ArrayList<Employee> employees = new ArrayList<>();
+    private ArrayList<Filter> filters = new ArrayList<>();
+    private ArrayList<Edit> edits = new ArrayList<>();
     private ObservableList<Employee> employeeList = FXCollections.observableArrayList();
-
+    private ArrayList<String> filtersReadable = new ArrayList<>();
+    private ArrayList<String> editsReadable = new ArrayList<>();
     public Boss boss = new Boss();
     Employee emp = new Employee(12, "dekiel", "wątły", "1293939393", "Masrjanin", "nie ma", "marsandstars@gmail.gay", "samsung galaksi 2", "wczoraj", (float)99222, 365, "walkman");
 
@@ -128,6 +145,12 @@ public class EmployeeController {
                     Employee employee = getTableView().getItems().get(getIndex());
                     employeeList.remove(employee);
                     boss.getEmployees().remove(employee);
+                    try{
+                        DataHandler.saveEmployeesToFile(employeeList, filePath);
+                        System.out.println("Employees saved to file.");
+                    } catch(IOException en){
+                        en.printStackTrace();
+                    }
                 });
             }
             @Override
@@ -157,14 +180,14 @@ public class EmployeeController {
         */
         employeeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         // Load employees from JSON
-        InputStream inputStream = Employee.class.getClassLoader().getResourceAsStream("employees.json");
-        if (inputStream == null) {
+        InputStream inputStreamEmployee = Employee.class.getClassLoader().getResourceAsStream("employees.json");
+        if (inputStreamEmployee == null) {
             throw new FileNotFoundException("File not found: employees.json");
         }
 
-        if (inputStream.available() != 0) {
+        if (inputStreamEmployee.available() != 0) {
             try {
-                employees = (ArrayList<Employee>) EmployeeDataHandler.loadEmployeesFromFile(filePath);
+                employees = (ArrayList<Employee>) DataHandler.loadEmployeesFromFile(filePath);
                 employeeList.addAll(employees);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -176,6 +199,39 @@ public class EmployeeController {
         employeeTable.setItems(employeeList);
         boss.setEmployees(employees);
         employees = null;
+
+        InputStream inputStreamFilter = Filter.class.getClassLoader().getResourceAsStream("filters.json");
+        if (inputStreamFilter == null) {
+            throw new FileNotFoundException("File not found: filters.json");
+        }
+
+        if (inputStreamFilter.available() != 0) {
+            try {
+                filters = (ArrayList<Filter>) DataHandler.loadFiltersFromFile(filtersPath);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        InputStream inputStreamEdit = Edit.class.getClassLoader().getResourceAsStream("edits.json");
+        if (inputStreamEdit == null) {
+            throw new FileNotFoundException("File not found: edits.json");
+        }
+
+        if (inputStreamEdit.available() != 0) {
+            try {
+                edits = (ArrayList<Edit>) DataHandler.loadEditsFromFile(editsPath);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        for(Filter f : filters){
+            filtersReadable.add(f.printFilter());
+            System.out.println(f.printFilter());
+        }
+        for(Edit e : edits){
+            editsReadable.add(e.printEdit());
+            System.out.println(e.printEdit());
+        }
     }
     Stage tempStage = new Stage();
     public void onAddEmployeeButton(ActionEvent actionEvent) throws IOException {
@@ -207,9 +263,9 @@ public class EmployeeController {
         boss.getEmployees().add(e);
         employeeTable.setItems(employeeList);
         employeeTable.refresh();
-        // Save employees to JSON
+
         try{
-            EmployeeDataHandler.saveEmployeesToFile(employeeList, filePath);
+            DataHandler.saveEmployeesToFile(employeeList, filePath);
             System.out.println("Employees saved to file.");
         } catch(IOException en){
             en.printStackTrace();
@@ -230,11 +286,21 @@ public class EmployeeController {
         tempStage2.setScene(scene);
         tempStage2.show();
     }
-    public void doneFiltering(ArrayList<Employee> searches){
+    public void doneFiltering(ArrayList<Employee> searches, ArrayList<Filter> filters){
         tempStage2.close();
         //ObservableList<Employee> search=FXCollections.observableArrayList();
         employeeList.setAll(searches);
         employeeTable.setItems(employeeList);
+        this.filters.addAll(filters);
+        for(Filter f : filters){
+            filtersReadable.add(f.printFilter());
+        }
+        try{
+            DataHandler.saveFiltersToFile(this.filters, filtersPath);
+            System.out.println("Filters saved to file.");
+        } catch(IOException en){
+            en.printStackTrace();
+        }
     }
     @FXML
     public void onPrintAllEmployees(ActionEvent actionEvent){
@@ -258,19 +324,83 @@ public class EmployeeController {
         tempStage3.setScene(scene);
         tempStage3.show();
     }
-    public void doneEditing(Employee editedEmp){
+    public void doneEditing(Employee editedEmp, Edit[] newEdit, String[] editWhat){
         tempStage3.close();
         employeeTable.refresh();
         int index = employeeList.indexOf(currentEditedEmployee);
         employeeList.set(index, editedEmp);
+        for(int i=0; i<3; i++){
+            newEdit[i].setName(currentEditedEmployee.getName());
+            newEdit[i].setSurname(currentEditedEmployee.getSurname());
+            newEdit[i].setPesel(currentEditedEmployee.getPesel());
+            newEdit[i].setNationality(currentEditedEmployee.getNationality());
+            newEdit[i].setAddress(currentEditedEmployee.getAddress());
+            newEdit[i].setEmail(currentEditedEmployee.getEmail());
+            newEdit[i].setPhone(currentEditedEmployee.getPhone());
+            newEdit[i].setBirth_date(currentEditedEmployee.getBirth_date());
+            newEdit[i].setSalary(currentEditedEmployee.getSalary());
+            newEdit[i].setDaysOff(currentEditedEmployee.getDaysOff());
+            newEdit[i].setPosition(currentEditedEmployee.getPosition());
+        }
+
+        if(editWhat[0]!=null){
+            newEdit[0].setSalary(Float.parseFloat(editWhat[0]));
+        }
+        if(editWhat[1]!=null){
+            newEdit[1].setDaysOff(Integer.parseInt(editWhat[1]));
+        }
+        if(editWhat[2]!=null){
+            newEdit[2].setPosition(editWhat[2]);
+        }
         currentEditedEmployee=null;
+        edits.add(newEdit[0]);
+        edits.add(newEdit[1]);
+        edits.add(newEdit[2]);
+        editsReadable.add(newEdit[0].printEdit());
+        editsReadable.add(newEdit[1].printEdit());
+        editsReadable.add(newEdit[2].printEdit());
         try{
-            EmployeeDataHandler.saveEmployeesToFile(employeeList, filePath);
+            DataHandler.saveEditsToFile(edits, editsPath);
+            System.out.println("Edits saved to file.");
+        } catch(IOException en){
+            en.printStackTrace();
+        }
+        try{
+            DataHandler.saveEmployeesToFile(employeeList, filePath);
             System.out.println("Employees saved to file.");
         } catch(IOException en){
             en.printStackTrace();
         }
     }
+    Stage tempStage4 = new Stage();
+    @FXML
+    public void onPrintFilters(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("search-string-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        ListingController controller = fxmlLoader.getController();
+        controller.getStrings(filtersReadable);
+        controller.setMainController(this);
+        controller.initialize();
+        tempStage4.setTitle("Search filters history!");
+        tempStage4.setScene(scene);
+        tempStage4.show();
+    }
+    Stage tempStage5 = new Stage();
+    @FXML
+    public void onPrintEdits(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("search-string-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        ListingController controller = fxmlLoader.getController();
+        controller.getStrings(editsReadable);
+        controller.setMainController(this);
+        controller.initialize();
+        tempStage5.setTitle("Search filters history!");
+        tempStage5.setScene(scene);
+        tempStage5.show();
+    }
+    @FXML
     public void onExitButton(ActionEvent actionEvent){
         mainController.closeApp();
     }

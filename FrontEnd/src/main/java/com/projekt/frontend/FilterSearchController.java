@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 
@@ -141,19 +142,66 @@ public class FilterSearchController {
         ArrayList<Employee> searches = new ArrayList<Employee>();
         //mainController.getBoss().getEmployees();
         ArrayList<Employee> temp = new ArrayList<Employee>();
-        temp.addAll(mainController.getBoss().listSome("IMIE", f.getName()));
-        temp.addAll(mainController.getBoss().listSome("NAZWISKO", f.getSurname()));
-        temp.addAll(mainController.getBoss().listSome("PESEL", f.getPesel()));
-        temp.addAll(mainController.getBoss().listSome("NARODOWOŚĆ", f.getNationality()));
-        temp.addAll(mainController.getBoss().listSome("ADRES ZAMIESZKANIA", f.getAddress()));
-        temp.addAll(mainController.getBoss().listSome("EMAIL", f.getEmail()));
-        temp.addAll(mainController.getBoss().listSome("TELEFON", f.getPhone()));
-        temp.addAll(mainController.getBoss().listSome("DATA URODZENIA", f.getBirth_date()));
-        temp.addAll(mainController.getBoss().listSome("WYPLATA", String.valueOf(f.getSalary())));
-        temp.addAll(mainController.getBoss().listSome("DNI WOLNE", String.valueOf(f.getDaysOff())));
-        temp.addAll(mainController.getBoss().listSome("STANOWISKO", f.getPosition()));
+        ArrayList<Filter> filters = new ArrayList<>();
+        Filter tempFilter = new Filter();
+        Pair<ArrayList<Employee>, Filter> result = new Pair<>(temp, tempFilter);
+        result=mainController.getBoss().listSome("IMIE", f.getName());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("NAZWISKO", f.getSurname());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("PESEL", f.getPesel());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("NARODOWOŚĆ", f.getNationality());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("ADRES ZAMIESZKANIA", f.getAddress());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("EMAIL", f.getEmail());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("TELEFON", f.getPhone());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("DATA URODZENIA", f.getBirth_date());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("WYPLATA", String.valueOf(f.getSalary()));
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("DNI WOLNE", String.valueOf(f.getDaysOff()));
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
+        result=mainController.getBoss().listSome("STANOWISKO", f.getPosition());
+        if(result.getKey().size()>0){
+            filters.add(result.getValue());
+            temp.addAll(result.getKey());
+        }
         if(temp.size()==0){
-            mainController.doneFiltering(searches);
+            mainController.doneFiltering(searches, filters);
             return;
         } else {
             searches.add(temp.get(0));
@@ -169,6 +217,11 @@ public class FilterSearchController {
                 }
             }
         }
-        mainController.doneFiltering(searches);
+        for(Filter filt : filters){
+            System.out.println(filt.getSearch_id());
+            System.out.println(filt.getSearch_name());
+            System.out.println(filt.getSearch_date());
+        }
+        mainController.doneFiltering(searches, filters);
     }
 }

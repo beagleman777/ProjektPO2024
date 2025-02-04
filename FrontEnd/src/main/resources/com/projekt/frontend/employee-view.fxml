@@ -45,9 +45,11 @@
          <bottom>
             <ButtonBar buttonMinWidth="110.0" prefHeight="40.0" BorderPane.alignment="CENTER">
               <buttons>
-                <Button minWidth="301.0" mnemonicParsing="false" onAction="#onSearchByFilter" prefHeight="25.0" text="Wyszukaj po filtrze" />
-                  <Button mnemonicParsing="false" onAction="#onPrintAllEmployees" text="Wyświetl wszystkich pracowników" />
                   <Button minWidth="317.0" mnemonicParsing="false" onAction="#onAddEmployeeButton" prefHeight="25.0" text="Dodaj pracownika" />
+                  <Button mnemonicParsing="false" onAction="#onPrintAllEmployees" text="Wyświetl wszystkich pracowników" />
+                <Button minWidth="301.0" mnemonicParsing="false" onAction="#onSearchByFilter" prefHeight="25.0" text="Wyszukaj po filtrze" />
+                  <Button mnemonicParsing="false" onAction="#onPrintFilters" text="Wyświetl historię filtrów" />
+                  <Button mnemonicParsing="false" onAction="#onPrintEdits" text="Wyświetl historię edycji" />
                   <Button mnemonicParsing="false" onAction="#onExitButton" prefHeight="25.0" text="Wyjdź" />
               </buttons>
                <BorderPane.margin>

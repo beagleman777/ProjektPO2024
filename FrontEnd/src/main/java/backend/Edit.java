@@ -16,6 +16,9 @@ public class Edit extends Employee {
         edit_id = "";
         edit_name = "";
     }
+    public String printEdit(){
+        return "Edit ID: " + getEdit_id() + ", Edit name: " + getEdit_name() + ", Edit date: " +  getEdit_date() + ", ID: " + getIdNum() + ", Name: " + getName() + ", Surname: " + getSurname() + ", Pesel: " + getPesel() + ", Nationality: " + getNationality() + ", Address: " + getAddress() + ", Email: " + getEmail() + ", Phone: " + getPhone() + ", Birth Date: " + getBirth_date() + ", Salary: " + getSalary() + ", Days Off: " + getDaysOff() + ", Position: " + getPosition();
+    }
 
     public String getEdit_date() {
         return edit_date;

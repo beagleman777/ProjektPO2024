@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 
 public class EditEmployeeController {
     Employee editEmp = new Employee();
+    Edit[] newEdit = new Edit[3];
     @FXML
     private TextField nameField;
     @FXML
@@ -98,18 +99,25 @@ public class EditEmployeeController {
     }
     @FXML
     public void onEditEmployee(ActionEvent event) {
+        String editWhat[] = new String[3];
+        editWhat[0]=null;
+        editWhat[1]=null;
+        editWhat[2]=null;
         if(salary!=null) {
-            HR.employeeUpdate(editEmp, "WYPLATA", salary);
+            newEdit[0]=HR.employeeUpdate(editEmp, "WYPLATA", salary);
+            editWhat[0]=salary;
             salary=null;
         }
         if(daysOff!=null) {
-            HR.employeeUpdate(editEmp, "DNI WOLNE", daysOff);
+            newEdit[1]=HR.employeeUpdate(editEmp, "DNI WOLNE", daysOff);
+            editWhat[1]=daysOff;
             daysOff=null;
         }
         if(position!=null) {
-            HR.employeeUpdate(editEmp,"STANOWISKO", position);
+            newEdit[2]=HR.employeeUpdate(editEmp,"STANOWISKO", position);
+            editWhat[2]=position;
             position=null;
         }
-        mainController.doneEditing(editEmp);
+        mainController.doneEditing(editEmp, newEdit, editWhat);
     }
 }
