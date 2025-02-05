@@ -6,6 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class AddEmployeeCotroller {
     @FXML
     private TextField nameField;
@@ -106,10 +112,49 @@ public class AddEmployeeCotroller {
     public void onPositionField(ActionEvent actionEvent){
 
     }
+    private boolean validBirthDate(String day){
+        boolean result=true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        try {
+            LocalDate.parse(day, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
     @FXML
     public void onAddTheEmployee(ActionEvent event) {
-        Float SALARY = Float.parseFloat(salary);
-        Integer DAYSOFF = Integer.parseInt(daysOff);
+        Float SALARY=null;
+        Integer DAYSOFF=null;
+        try {
+            try {
+                SALARY = Float.parseFloat(salary);
+                SALARY = Math.round(SALARY * 100) / 100.0f;
+                DAYSOFF = Integer.parseInt(daysOff);
+                if(Long.parseLong(pesel)<0){
+                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                }
+                if(Long.parseLong(phone)<0){
+                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                }
+                if(pesel.length()!=11){
+                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                }
+                if(SALARY<0){
+                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                }
+                if(DAYSOFF<0){
+                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                }
+            } catch (NumberFormatException e) {
+                throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+            }
+        } catch (ValidatingErrorException | IOException ex){return;}
+        try{
+            if(!validBirthDate(birth)){
+                throw new ValidatingErrorException("Datę należy podać w formacie DD.MM.YYY");
+            }
+        } catch (ValidatingErrorException exc){return;} catch (IOException e) {return;}
         mainController.getNewEmployee(name, surname, pesel, nationality, address, email, phone, birth, SALARY, DAYSOFF, position);
     }
 }

@@ -47,7 +47,7 @@
                         <Label text="Dni wolne" />
                         <TextField fx:id="daysoffField" maxWidth="-Infinity" onAction="#onDaysoffField" prefWidth="207.0" promptText="Dni wolne" />
                   <Label text="Stanowisko" />
-                  <TextField fx:id="positionField" editable="false" maxWidth="-Infinity" onAction="#onPositionField" prefWidth="207.0" promptText="Stanowisko" />
+                  <TextField fx:id="positionField" maxWidth="-Infinity" onAction="#onPositionField" prefWidth="207.0" promptText="Stanowisko" />
                     </children>
                 </VBox>
             </center>
