@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projekt.frontend.EmployeeBossController">
+    <content>
+        <BorderPane>
+            <center>
+                <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+                    <content>
+                        <TableView fx:id="employeeTable">
+                            <columns>
+                                <TableColumn fx:id="tableID" minWidth="75.0" text="ID" />
+                                <TableColumn fx:id="tableName" minWidth="99.0" text=" Imię (Imiona)" />
+                                <TableColumn fx:id="tableSurname" minWidth="60.0" text="Nazwisko" />
+                                <TableColumn fx:id="tablePESEL" minWidth="86.0" text="PESEL" />
+                                <TableColumn fx:id="tableNationality" minWidth="79.0" text="Narodowość" />
+                                <TableColumn fx:id="tableAddress" minWidth="51.0" text="Adres" />
+                                <TableColumn fx:id="tableEmail" minWidth="75.0" text="Email" />
+                                <TableColumn fx:id="tablePhone" minWidth="75.0" text="Telefon" />
+                                <TableColumn fx:id="tableBirth" minWidth="105.0" text="Data urodzenia" />
+                                <TableColumn fx:id="tableSalary" minWidth="104.0" text="Wynagrodzenie" />
+                                <TableColumn fx:id="tableDaysoff" minWidth="68.0" text="Dni wolne" />
+                                <TableColumn fx:id="tablePosition" minWidth="80.0" text="Stanowisko" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </content>
+                </ScrollPane>
+            </center>
+            <top>
+                <Label text="System Zarządzania Pracownikami" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+            </top>
+            <bottom>
+                <ButtonBar buttonMinWidth="110.0" prefHeight="40.0" BorderPane.alignment="CENTER">
+                    <buttons>
+                        <Button mnemonicParsing="false" onAction="#onPrintAllEmployees" text="Wyświetl wszystkich pracowników" />
+                        <Button minWidth="301.0" mnemonicParsing="false" onAction="#onSearchByFilter" prefHeight="25.0" text="Wyszukaj po filtrze" />
+                        <Button mnemonicParsing="false" onAction="#onPrintFilters" text="Wyświetl historię filtrów" />
+                        <Button mnemonicParsing="false" onAction="#onExitButton" prefHeight="25.0" text="Wyjdź" />
+                    </buttons>
+                    <BorderPane.margin>
+                        <Insets right="85.0" />
+                    </BorderPane.margin>
+                </ButtonBar>
+            </bottom></BorderPane>
+    </content>
+</ScrollPane>

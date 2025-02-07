@@ -75,6 +75,9 @@ public class Boss {
                 String pesel = search;
                 Filter f3 = new Filter(new Date().toString(), rand.nextInt(1000000000), "Filtrowanie rekordów po PESEL'u");
                 for (Employee e : Employees) {
+                    if(e.getPesel()==null){
+                        continue;
+                    }
                     if (e.getPesel().equals(pesel)){
                         Employees_Filtered.add(e);
                         f3.getIds().add(e.getIdNum());
@@ -143,6 +146,9 @@ public class Boss {
                 float floatSalary = Float.parseFloat(salary);
                 Filter f9 = new Filter(new Date().toString(), rand.nextInt(1000000000), "Filtrowanie rekordów po wynagrodzeniu");
                 for (Employee e : Employees) {
+                    if(e.getSalary()==null){
+                        continue;
+                    }
                     if (e.getSalary()==floatSalary){
                         Employees_Filtered.add(e);
                         f9.getIds().add(e.getIdNum());
@@ -155,6 +161,9 @@ public class Boss {
                 int intDaysOff = Integer.parseInt(daysOff);
                 Filter f10 = new Filter(new Date().toString(), rand.nextInt(1000000000), "Filtrowanie rekordów po dniach wolnych");
                 for (Employee e : Employees) {
+                    if(e.getDaysOff()==null){
+                        continue;
+                    }
                     if (e.getDaysOff()==intDaysOff){
                         Employees_Filtered.add(e);
                         f10.getIds().add(e.getIdNum());
@@ -166,6 +175,9 @@ public class Boss {
                 String position = search;
                 Filter f11 = new Filter(new Date().toString(), rand.nextInt(1000000000), "Filtrowanie rekordów po stanowisku");
                 for (Employee e : Employees) {
+                    if(e.getPosition()==null){
+                        continue;
+                    }
                     if (e.getPosition().equals(position)){
                         Employees_Filtered.add(e);
                         f11.getIds().add(e.getIdNum());

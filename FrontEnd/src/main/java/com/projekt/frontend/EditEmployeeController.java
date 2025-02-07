@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class EditEmployeeController {
     Employee editEmp = new Employee();
     Edit[] newEdit = new Edit[3];
@@ -99,22 +101,43 @@ public class EditEmployeeController {
     }
     @FXML
     public void onEditEmployee(ActionEvent event) {
+        Float SALARY=null;
+        Integer DAYSOFF=null;
+        try {
+            try {
+                if(salary!=null){
+                    SALARY = Float.parseFloat(salary);
+                    SALARY = Math.round(SALARY * 100) / 100.0f;
+                    if(SALARY<0){
+                        throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                    }
+                }
+                if(daysOff!=null){
+                    DAYSOFF = Integer.parseInt(daysOff);
+                    if(DAYSOFF<0){
+                        throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                    }
+                }
+            } catch (NumberFormatException e) {
+                throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+            }
+        } catch (ValidatingErrorException | IOException ex){return;}
         String editWhat[] = new String[3];
         editWhat[0]=null;
         editWhat[1]=null;
         editWhat[2]=null;
-        if(salary!=null) {
-            newEdit[0]=HR.employeeUpdate(editEmp, "WYPLATA", salary);
+        if(salary!=null && salary.length()>0 && !salary.isEmpty()) {
+            newEdit[0]=mainController.getHR().employeeUpdate(editEmp, "WYPLATA", salary);
             editWhat[0]=salary;
             salary=null;
         }
-        if(daysOff!=null) {
-            newEdit[1]=HR.employeeUpdate(editEmp, "DNI WOLNE", daysOff);
+        if(daysOff!=null && daysOff.length()>0 && !daysOff.isEmpty()) {
+            newEdit[1]=mainController.getHR().employeeUpdate(editEmp, "DNI WOLNE", daysOff);
             editWhat[1]=daysOff;
             daysOff=null;
         }
-        if(position!=null) {
-            newEdit[2]=HR.employeeUpdate(editEmp,"STANOWISKO", position);
+        if(position!=null && position.length()>0 && !position.isEmpty()) {
+            newEdit[2]=mainController.getHR().employeeUpdate(editEmp,"STANOWISKO", position);
             editWhat[2]=position;
             position=null;
         }

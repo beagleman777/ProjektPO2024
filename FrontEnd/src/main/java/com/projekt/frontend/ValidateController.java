@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
-public class ValidateController implements Serializable {
+public class ValidateController {
     //Back
     private Stage primaryStage;
     private Stage employeeStage;
@@ -39,18 +39,6 @@ public class ValidateController implements Serializable {
     private PasswordField passwordField;
     @FXML
     private ToggleButton logAs;
-
-    //tworzenie nowego członka personelu
-    @FXML
-    TextField newLoginField;
-    @FXML
-    PasswordField newPasswordField;
-    @FXML
-    PasswordField repeatNewPasswordField;
-    @FXML
-    private Label addStaffLabel;
-    @FXML
-    private Button addStaffButton;
 
     //Metody
     public void initialize() {
@@ -106,32 +94,39 @@ public class ValidateController implements Serializable {
     @FXML
     public void onLoginField(ActionEvent actionEvent) {
         //loginField.textProperty().addListener((observable, oldValue, newValue) -> {login=newValue;});
-        System.out.println(login);
+        //System.out.println(login);
     }
     @FXML
     public void onPasswordField(ActionEvent actionEvent) {
         //passwordField.textProperty().addListener((observable, oldValue, newValue) -> {password=newValue;});
-        System.out.println(password);
+        //System.out.println(password);
     }
     @FXML
     public void onLogIn (ActionEvent actionEvent) throws IOException {
-        if(login == null || password == null){
+        if(login == null || login.isEmpty() || password == null || password.isEmpty()){
             try{
                 throw new ValidatingErrorException("Nie wprowadzono loginu lub hasła!");
             } catch (ValidatingErrorException e) {}
-        } else if((arePassesCorrectBoss() && bossOrHR==true)){
+        } else if((arePassesCorrectBoss() && bossOrHR==true)) {
+            primaryStage.close();
+            FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("employee-boss-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            employeeStage = new Stage();
+            employeeStage.setTitle("Employee Management System: Boss");
+            EmployeeBossController employeeController = fxmlLoader.getController();
+            employeeController.setMainController(this);
+            employeeStage.setScene(scene);
+            employeeStage.show();
+        } else if(arePassesCorrectHR() && bossOrHR==false){
             primaryStage.close();
             FXMLLoader fxmlLoader = new FXMLLoader(EmployeeApplication.class.getResource("employee-view.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             employeeStage = new Stage();
+            employeeStage.setTitle("Employee Management System: HR");
             EmployeeController employeeController = fxmlLoader.getController();
             employeeController.setMainController(this);
-            if(bossOrHR){
-                employeeStage.setTitle("Employee Management System: Boss");
-            } else {
-                employeeStage.setTitle("Employee Management System: HR");
-            }
             employeeStage.setScene(scene);
             employeeStage.show();
         } else {
@@ -193,6 +188,10 @@ public class ValidateController implements Serializable {
         } catch (IOException e){
             System.err.println("Nie ma pliku");
         }
+        Boss newBoss = new Boss();
+        newBoss.setLogin(newLogin);
+        newBoss.setPassword(newPassword);
+        bosses.add(newBoss);
     }
     public void acquirePassesHR(String log, String pass) {
         this.newLogin=log;
@@ -205,6 +204,10 @@ public class ValidateController implements Serializable {
         } catch (IOException e){
             System.err.println("Nie ma pliku");
         }
+        HR newHR = new HR();
+        newHR.setLogin(newLogin);
+        newHR.setPassword(newPassword);
+        hrs.add(newHR);
     }
 
     private boolean arePassesCorrectBoss() {

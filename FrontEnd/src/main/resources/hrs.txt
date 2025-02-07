@@ -1,8 +1,2 @@
-a
-pant
-yes
-serious
-b
-b
-c
-c
+login1
+haslo1

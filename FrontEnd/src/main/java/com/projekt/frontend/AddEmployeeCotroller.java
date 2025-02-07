@@ -49,10 +49,6 @@ public class AddEmployeeCotroller {
     private String position;
 
     private EmployeeController mainController;
-    private Stage primaryStage;
-    public void setPrimaryStage(Stage stage) {
-        this.primaryStage = stage;
-    }
     public void setMainController(EmployeeController mainController) {this.mainController=mainController;}
     public void initialize() {
         nameField.textProperty().addListener((observable, oldValue, newValue) -> {name=newValue;});
@@ -124,32 +120,45 @@ public class AddEmployeeCotroller {
     }
     @FXML
     public void onAddTheEmployee(ActionEvent event) {
+        try{
+            if(name==null || surname==null || nationality==null || address==null || email==null || phone==null || birth==null){
+                throw new ValidatingErrorException("Ważne pola pozostawiono puste!");
+            }
+        } catch (ValidatingErrorException e){} catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (RuntimeException e){return;}
         Float SALARY=null;
         Integer DAYSOFF=null;
         try {
             try {
-                SALARY = Float.parseFloat(salary);
-                SALARY = Math.round(SALARY * 100) / 100.0f;
-                DAYSOFF = Integer.parseInt(daysOff);
-                if(Long.parseLong(pesel)<0){
+                if(salary!=null){
+                    SALARY = Float.parseFloat(salary);
+                    SALARY = Math.round(SALARY * 100) / 100.0f;
+                    if(SALARY<0){
+                        throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                    }
+                }
+                if(daysOff!=null){
+                    DAYSOFF = Integer.parseInt(daysOff);
+                    if(DAYSOFF<0){
+                        throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                    }
+                }
+                if(pesel !=null){
+                    if(pesel.length()!=11 || Long.parseLong(pesel)<0){
+                        if(pesel!=null){
+                            throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                        }
+                    }
                     throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
                 }
                 if(Long.parseLong(phone)<0){
                     throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
                 }
-                if(pesel.length()!=11){
-                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
-                }
-                if(SALARY<0){
-                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
-                }
-                if(DAYSOFF<0){
-                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
-                }
             } catch (NumberFormatException e) {
                 throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
             }
-        } catch (ValidatingErrorException | IOException ex){return;}
+        } catch (ValidatingErrorException | IOException | NullPointerException exce){return;}
         try{
             if(!validBirthDate(birth)){
                 throw new ValidatingErrorException("Datę należy podać w formacie DD.MM.YYY");
