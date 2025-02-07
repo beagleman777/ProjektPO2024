@@ -118,7 +118,7 @@ public class EmployeeBossController {
         }
         for(Filter f : filters){
             filtersReadable.add(f.printFilter());
-            System.out.println(f.printFilter());
+            //System.out.println(f.printFilter());
         }
     }
     public Boss getBoss(){

@@ -190,6 +190,9 @@ public class EmployeeController {
                 throw new RuntimeException(ex);
             }
         }
+
+        System.out.println("Filters loaded from file");
+
         InputStream inputStreamEdit = Edit.class.getClassLoader().getResourceAsStream("edits.json");
         if (inputStreamEdit == null) {
             throw new FileNotFoundException("File not found: edits.json");
@@ -202,13 +205,16 @@ public class EmployeeController {
                 throw new RuntimeException(ex);
             }
         }
+
+        System.out.println("Edits loaded from file");
+
         for(Filter f : filters){
             filtersReadable.add(f.printFilter());
-            System.out.println(f.printFilter());
+            //System.out.println(f.printFilter());
         }
         for(Edit e : edits){
             editsReadable.add(e.printEdit());
-            System.out.println(e.printEdit());
+            //System.out.println(e.printEdit());
         }
     }
     Stage tempStage = new Stage();

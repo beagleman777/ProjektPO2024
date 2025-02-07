@@ -47,12 +47,12 @@ public class ValidateController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for(Boss i : bosses){
+        /*for(Boss i : bosses){
             System.out.println(i.getLogin() + " " + i.getPassword());
         }
         for(HR i : hrs){
             System.out.println(i.getLogin() + " " + i.getPassword());
-        }
+        }*/
         loginField.textProperty().addListener((observable, oldValue, newValue) -> {login=newValue;});
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {password=newValue;});
     }
