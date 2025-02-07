@@ -131,36 +131,41 @@ public class AddEmployeeCotroller {
         Integer DAYSOFF=null;
         try {
             try {
-                if(salary!=null){
+                if(salary!=null || !salary.isEmpty()){
                     SALARY = Float.parseFloat(salary);
                     SALARY = Math.round(SALARY * 100) / 100.0f;
                     if(SALARY<0){
-                        throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                        //System.out.println("a");
+                        throw new ValidatingErrorException("Wprowadzono błędne dane do wynagrodzenia!");
                     }
                 }
-                if(daysOff!=null){
+                if(daysOff!=null || !daysOff.isEmpty()){
                     DAYSOFF = Integer.parseInt(daysOff);
                     if(DAYSOFF<0){
-                        throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                        //System.out.println("a");
+                        throw new ValidatingErrorException("Wprowadzono błędne dane do dni wolnych!");
                     }
                 }
                 if(pesel !=null){
                     if(pesel.length()!=11 || Long.parseLong(pesel)<0){
                         if(pesel!=null){
-                            throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                            //System.out.println("a");
+                            throw new ValidatingErrorException("Wprowadzono błędny PESEL!");
                         }
                     }
-                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
                 }
                 if(Long.parseLong(phone)<0){
-                    throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
+                    //System.out.println("a");
+                    throw new ValidatingErrorException("Wprowadzono błędny numer telefonu!");
                 }
             } catch (NumberFormatException e) {
+                //System.out.println("a");
                 throw new ValidatingErrorException("Wprowadzono błędne dane do pól liczbowch!");
             }
         } catch (ValidatingErrorException | IOException | NullPointerException exce){return;}
         try{
             if(!validBirthDate(birth)){
+                //System.out.println("a");
                 throw new ValidatingErrorException("Datę należy podać w formacie DD.MM.YYY");
             }
         } catch (ValidatingErrorException exc){return;} catch (IOException e) {return;}
